@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "782225992061",
+    "project_id": "pikkapa-98bb1",
+    "storage_bucket": "pikkapa-98bb1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:782225992061:android:4d1d3fcf12959a658a0414",
+        "android_client_info": {
+          "package_name": "com.pikkapa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "782225992061-u389srmefgl28fh0a750n2i25bb30ndj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHjBPyeEyLYFTOIBnpedHjb67kqMcl868"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "782225992061-u389srmefgl28fh0a750n2i25bb30ndj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

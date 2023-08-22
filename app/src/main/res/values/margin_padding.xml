@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_micro">5dp</dimen>
+    <dimen name="margin_mini">10dp</dimen>
+    <dimen name="margin_small">15dp</dimen>
+    <dimen name="margin_medium">25dp</dimen>
+    <dimen name="margin_large">30dp</dimen>
+    <dimen name="margin_huge">35dp</dimen>
+    <dimen name="margin_jumbo">40dp</dimen>
+</resources>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/layout_information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_medium"
+        app:cardCornerRadius="@dimen/margin_mini">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_horizontal1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.8"/>
+
+            <ImageView
+                android:id="@+id/iv_information_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_image_not_supported"/>
+
+            <TextView
+                android:id="@+id/tv_information_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/margin_micro"
+                android:paddingTop="@dimen/margin_micro"
+                android:background="@color/color_white_transparent"
+                android:text="This is the information title"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_medium"
+                android:textColor="@color/color_primary_dark"
+                app:layout_constraintBottom_toTopOf="@id/guideline_horizontal1"/>
+
+            <TextView
+                android:id="@+id/tv_information_detail"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:padding="@dimen/margin_micro"
+                android:background="@color/color_white_transparent"
+                android:text="This is the information detail, this is the information detail, this is the information detail , this is the information detail, this is the information detail, this is the information detail, this is the information detail...."
+                android:textStyle="bold"
+                android:textSize="@dimen/text_small"
+                android:textColor="@color/color_primary_dark"
+                app:layout_constraintTop_toBottomOf="@id/guideline_horizontal1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

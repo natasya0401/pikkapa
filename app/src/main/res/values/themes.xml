@@ -1,0 +1,25 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Pikkapa" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+<!--        <item name="android:actionBarStyle">@style/MyActionBar</item>-->
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryVariant">@color/color_primary</item>
+        <item name="colorOnPrimary">@color/color_primary</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/color_secondary</item>
+        <item name="colorSecondaryVariant">@color/color_secondary</item>
+        <item name="colorOnSecondary">@color/color_secondary</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/color_primary</item>
+        <!-- Customize your theme here. -->
+
+        <item name="android:fontFamily">@font/poppins</item>
+<!--        <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">-->
+<!--            <item name="android:background">ANY_HEX_COLOR_CODE</item>-->
+<!--        </style>-->
+
+    </style>
+</resources>
