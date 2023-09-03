@@ -18,7 +18,9 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.pikkapa.R
+import com.pikkapa.data.access.ReminderAccess
 import com.pikkapa.databinding.ActivityReminderAddBinding
+import com.pikkapa.entity.ReminderEntity
 import com.pikkapa.tools.alarm.AlarmItem
 import com.pikkapa.tools.alarm.AlarmReceiver
 import com.pikkapa.tools.alarm.AndroidAlarmScheduler
@@ -27,6 +29,7 @@ import java.text.SimpleDateFormat
 //import com.plcoding.alarmmanagerguide.AlarmItem
 //import com.plcoding.alarmmanagerguide.AlarmReceiver
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class ReminderAddActivity : AppCompatActivity() {
@@ -212,13 +215,40 @@ class ReminderAddActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            val reminderAccess = ReminderAccess(this)
+
+            var latestAlarmId = reminderAccess.getLatestId()
+
+//            if(latestAlarmId==0) {
+//                Toast.makeText(this, "Gagal membuat alarm", Toast.LENGTH_LONG)
+//                return@setOnClickListener
+//            }
+
+            latestAlarmId+=1
+
             var alarmScheduler = AndroidAlarmScheduler(this)
-            var alarmItem = AlarmItem(0, timePick, datePick, repeatePick, title, notes)
+            var alarmItem = AlarmItem(latestAlarmId, timePick, datePick, repeatePick, title, notes)
+
+            var data = ReminderEntity(
+                0,
+                title,
+                notes,
+                timePick,
+                datePick,
+                repeatePick.equals("SATU KALI"),
+                !repeatePick.equals("SATU KALI"),
+                if(!repeatePick.equals("SATU KALI")) repeatePick.split(" ")[1] else "",
+                false,
+                arrayListOf(""),
+                arrayListOf("$latestAlarmId")
+            )
 
             var dialog = DialogBase(this, "Yakin ingin simpan?", "SIMPAN", "BATAL") {
                 //simpan reminder
                 if(repeatePick.equals("SATU KALI")) alarmScheduler.schedule(alarmItem, false)
                 else alarmScheduler.schedule(alarmItem, true)
+
+                reminderAccess.insert(data)
 
                 this@ReminderAddActivity.finish()
                 it.dismiss()

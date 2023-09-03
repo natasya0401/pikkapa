@@ -3,16 +3,11 @@ package com.pikkapa.view.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.content.res.AppCompatResources
-import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.pikkapa.R
-import com.pikkapa.domain.ReminderEntity
-import com.pikkapa.domain.TutorialEntity
+import com.pikkapa.entity.ReminderEntity
 
 class ReminderItemAdapter(
     private val reminder: ArrayList<ReminderEntity>,
@@ -36,16 +31,14 @@ class ReminderItemAdapter(
             holder.repeat.text = "Setiap Hari"
         } else if (item.repeatWeekly) {
             when (item.repeatWeeklyDay) {
-                "0" -> holder.repeat.text = "Setiap Hari Senin"
-                "1" -> holder.repeat.text = "Setiap Hari Selasa"
-                "2" -> holder.repeat.text = "Setiap Hari Rabu"
-                "3" -> holder.repeat.text = "Setiap Hari Kamis"
-                "4" -> holder.repeat.text = "Setiap Hari Jumat"
-                "5" -> holder.repeat.text = "Setiap Hari Sabtu"
-                "6" -> holder.repeat.text = "Setiap Hari Minggu"
+                "SENIN" -> holder.repeat.text = "Setiap Hari Senin"
+                "SELASA" -> holder.repeat.text = "Setiap Hari Selasa"
+                "RABU" -> holder.repeat.text = "Setiap Hari Rabu"
+                "KAMIS" -> holder.repeat.text = "Setiap Hari Kamis"
+                "JUMAT" -> holder.repeat.text = "Setiap Hari Jumat"
+                "SABTU" -> holder.repeat.text = "Setiap Hari Sabtu"
+                "MINGGU" -> holder.repeat.text = "Setiap Hari Minggu"
             }
-        } else if (item.repeatMonthly) {
-            holder.repeat.text = "Setiap tanggal ${item.repeatMothlyDate}"
         } else {
             holder.repeat.text = item.date
         }

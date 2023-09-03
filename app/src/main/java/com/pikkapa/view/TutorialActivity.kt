@@ -6,11 +6,8 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pikkapa.R
-import com.pikkapa.databinding.ActivityHomeBinding
 import com.pikkapa.databinding.ActivityTutorialBinding
-import com.pikkapa.domain.InformationEntity
-import com.pikkapa.domain.TutorialEntity
-import com.pikkapa.view.adapter.InformationItemAdapter
+import com.pikkapa.entity.TutorialEntity
 import com.pikkapa.view.adapter.TutorialItemAdapter
 
 class TutorialActivity : AppCompatActivity() {

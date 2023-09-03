@@ -2,12 +2,9 @@ package com.pikkapa.tools.dialog
 
 import android.app.Dialog
 import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
 import android.widget.TextView
 import com.pikkapa.R
-import com.pikkapa.databinding.DialogConfirmationBinding
-import com.pikkapa.domain.TutorialEntity
 
 class DialogBase(
     context: Context,

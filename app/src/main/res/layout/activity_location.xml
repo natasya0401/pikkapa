@@ -17,5 +17,16 @@
             android:id="@+id/toolbar"
             layout="@layout/item_toolbar"/>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_item_reminder"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            tools:itemCount="20"
+            tools:listitem="@layout/item_location"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginHorizontal="@dimen/margin_small"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

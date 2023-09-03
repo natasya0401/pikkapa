@@ -1,4 +1,4 @@
-package com.pikkapa.domain
+package com.pikkapa.entity
 
 data class InformationEntity (
     var title:String = "judul",

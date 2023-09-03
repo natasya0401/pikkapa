@@ -1,6 +1,5 @@
 package com.pikkapa.view.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +10,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.pikkapa.R
-import com.pikkapa.domain.InformationEntity
-import com.pikkapa.view.MenuActivity
+import com.pikkapa.entity.InformationEntity
 
 class InformationItemAdapter(
     private val information: ArrayList<InformationEntity>,

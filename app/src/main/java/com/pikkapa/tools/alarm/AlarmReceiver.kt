@@ -15,6 +15,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.pikkapa.R
+import com.pikkapa.data.access.ReminderAccess
 import com.pikkapa.view.ReminderActivity
 
 class AlarmReceiver: BroadcastReceiver() {
@@ -27,8 +28,11 @@ class AlarmReceiver: BroadcastReceiver() {
             this.context = context
             val title = intent?.getStringExtra("title") ?: return
             val message = intent?.getStringExtra("message") ?: return
+            val id = intent?.getStringExtra("alarmId") ?: return
             createNotificationChanel("reminder")
             sendNotification(title, "reminder", getNextNotificationId(context), message)
+            val reminderAccess = ReminderAccess(this.context)
+            reminderAccess.delete(id.toInt())
             println("Alarm triggered: $message")
             Log.d("alarm", "alarm triggered $message")
         }

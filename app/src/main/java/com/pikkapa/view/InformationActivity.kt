@@ -3,14 +3,12 @@ package com.pikkapa.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.pikkapa.R
 import com.pikkapa.databinding.ActivityInformationBinding
-import com.pikkapa.domain.InformationEntity
+import com.pikkapa.entity.InformationEntity
 import com.pikkapa.view.adapter.InformationItemAdapter
 
 class InformationActivity : AppCompatActivity() {

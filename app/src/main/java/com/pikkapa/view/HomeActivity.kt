@@ -14,8 +14,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pikkapa.R
 import com.pikkapa.databinding.ActivityHomeBinding
-import com.pikkapa.domain.InformationEntity
-import com.pikkapa.domain.ReminderEntity
+import com.pikkapa.entity.InformationEntity
+import com.pikkapa.entity.ReminderEntity
 import com.pikkapa.view.adapter.InformationItemAdapter
 import java.text.SimpleDateFormat
 import java.util.*
@@ -56,7 +56,7 @@ class HomeActivity : AppCompatActivity() {
         binding.layoutReminder.visibility = View.GONE
 
         //dummy
-        var reminder = ReminderEntity(1, "Minum Obat","15:00:00", "10-08-2023")
+        var reminder = ReminderEntity(1, "Minum Obat","","15:00:00", "10-08-2023")
 
         val sdf = SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
         val reminderDate = sdf.parse("${reminder.date} ${reminder.time}")

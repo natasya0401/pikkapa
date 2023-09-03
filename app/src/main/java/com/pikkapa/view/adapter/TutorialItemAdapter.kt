@@ -10,8 +10,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.pikkapa.R
-import com.pikkapa.domain.InformationEntity
-import com.pikkapa.domain.TutorialEntity
+import com.pikkapa.entity.TutorialEntity
 
 class TutorialItemAdapter(
     private val tutorial: ArrayList<TutorialEntity>,

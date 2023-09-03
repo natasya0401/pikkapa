@@ -8,8 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.pikkapa.R
 import com.pikkapa.databinding.ActivityInformationDetailBinding
-import com.pikkapa.domain.InformationEntity
-import kotlin.math.log
+import com.pikkapa.entity.InformationEntity
 
 
 class InformationDetailActivity : AppCompatActivity() {
