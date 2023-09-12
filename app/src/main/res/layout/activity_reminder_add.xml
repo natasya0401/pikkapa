@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.ReminderAddActivity"
+        android:background="@color/color_background">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/item_toolbar"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_medium"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+            <TextView
+                android:id="@+id/tv_reminder_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Judul"
+                android:textSize="@dimen/text_medium"
+                android:textColor="@color/color_secondary"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <EditText
+                android:id="@+id/et_reminder_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="..."
+                android:textSize="@dimen/text_medium"
+                android:textColor="@color/color_secondary"
+                android:textColorHint="@color/color_primary"
+                android:background="@drawable/bg_square_white"
+                android:paddingHorizontal="@dimen/margin_mini"
+                app:layout_constraintTop_toBottomOf="@id/tv_reminder_title"/>
+
+            <TextView
+                android:id="@+id/tv_reminder_notes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Catatan"
+                android:textSize="@dimen/text_medium"
+                android:textColor="@color/color_secondary"
+                android:layout_marginTop="@dimen/margin_medium"
+                app:layout_constraintTop_toBottomOf="@id/et_reminder_title"/>
+
+            <EditText
+                android:id="@+id/et_reminder_notes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="..."
+                android:textSize="@dimen/text_medium"
+                android:textColor="@color/color_secondary"
+                android:textColorHint="@color/color_primary"
+                android:background="@drawable/bg_square_white"
+                android:paddingHorizontal="@dimen/margin_mini"
+                app:layout_constraintTop_toBottomOf="@id/tv_reminder_notes"/>
+
+            <TextView
+                android:id="@+id/tv_reminder_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Waktu"
+                android:textSize="@dimen/text_medium"
+                android:textColor="@color/color_secondary"
+                android:layout_marginTop="@dimen/margin_medium"
+                app:layout_constraintTop_toBottomOf="@id/et_reminder_notes"
+                app:layout_constraintBottom_toBottomOf="@id/bt_reminder_time_picker"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/bt_reminder_time_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pilih Waktu"
+                android:textSize="@dimen/text_medium"
+                android:textColor="@color/color_secondary"
+                android:textStyle="bold"
+                android:background="@drawable/bg_square_white"
+                android:paddingHorizontal="@dimen/margin_mini"
+                android:paddingTop="@dimen/margin_micro"
+                android:layout_marginTop="@dimen/margin_medium"
+                app:layout_constraintTop_toBottomOf="@id/et_reminder_notes"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_reminder_repeat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pengulangan"
+                android:textSize="@dimen/text_medium"
+                android:textColor="@color/color_secondary"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:paddingTop="@dimen/margin_micro"
+                app:layout_constraintTop_toBottomOf="@id/bt_reminder_time_picker"
+                app:layout_constraintBottom_toBottomOf="@id/tv_reminder_repeat_picker"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_reminder_repeat_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SATU KALI"
+                android:textSize="@dimen/text_medium"
+                android:textStyle="bold"
+                android:textColor="@color/color_secondary"
+                android:background="@drawable/bg_square_white"
+                android:paddingHorizontal="@dimen/margin_mini"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:paddingTop="@dimen/margin_micro"
+                app:layout_constraintTop_toBottomOf="@id/bt_reminder_time_picker"
+                app:layout_constraintEnd_toStartOf="@id/iv_reminder_repeat_picker"/>
+
+            <ImageView
+                android:id="@+id/iv_reminder_repeat_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:src="@drawable/ic_menu_burger"
+                app:layout_constraintTop_toTopOf="@id/tv_reminder_repeat_picker"
+                app:layout_constraintBottom_toBottomOf="@id/tv_reminder_repeat_picker"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_reminder_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tanggal"
+                android:textSize="@dimen/text_medium"
+                android:textColor="@color/color_secondary"
+                android:layout_marginTop="@dimen/margin_medium"
+                app:layout_constraintTop_toBottomOf="@id/tv_reminder_repeat_picker"
+                app:layout_constraintBottom_toBottomOf="@id/tv_reminder_date_picker"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_reminder_date_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pilih Tanggal"
+                android:textSize="@dimen/text_medium"
+                android:textColor="@color/color_secondary"
+                android:textStyle="bold"
+                android:background="@drawable/bg_square_white"
+                android:paddingHorizontal="@dimen/margin_mini"
+                android:paddingTop="@dimen/margin_micro"
+                android:layout_marginTop="@dimen/margin_medium"
+                app:layout_constraintTop_toBottomOf="@id/tv_reminder_repeat_picker"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+<!--            <TextView-->
+<!--                android:id="@+id/bt_reminder_date_picker"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Pilih Waktu"-->
+<!--                android:textSize="@dimen/text_medium"-->
+<!--                android:textColor="@color/color_secondary"-->
+<!--                android:textStyle="bold"-->
+<!--                android:background="@drawable/bg_square_white"-->
+<!--                android:paddingHorizontal="@dimen/margin_mini"-->
+<!--                android:paddingTop="@dimen/margin_micro"-->
+<!--                android:layout_marginTop="@dimen/margin_medium"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/tv_reminder_repeat_picker"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"/>-->
+
+
+            <TextView
+                android:id="@+id/bt_reminder_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BATAL"
+                android:textSize="@dimen/text_medium"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_square_primarycolor"
+                android:paddingHorizontal="@dimen/margin_medium"
+                android:paddingVertical="@dimen/margin_micro"
+                android:layout_marginTop="@dimen/margin_huge"
+                app:layout_constraintTop_toBottomOf="@id/tv_reminder_date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/bt_reminder_save"/>
+
+            <TextView
+                android:id="@+id/bt_reminder_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SIMPAN"
+                android:textSize="@dimen/text_medium"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_square_secondarycolor"
+                android:paddingHorizontal="@dimen/margin_medium"
+                android:paddingVertical="@dimen/margin_micro"
+                android:layout_marginTop="@dimen/margin_huge"
+                app:layout_constraintTop_toBottomOf="@id/tv_reminder_date"
+                app:layout_constraintStart_toEndOf="@id/bt_reminder_cancel"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

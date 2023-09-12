@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.HomeActivity"
+        android:background="@color/color_background">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/item_toolbar"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_medium"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_reminder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_medium"
+                    android:paddingHorizontal="@dimen/margin_medium"
+                    android:paddingVertical="@dimen/margin_small"
+                    android:background="@drawable/bg_square_secondarycolor">
+
+                    <TextView
+                        android:id="@+id/tv_reminder_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Reminder Title"
+                        android:textSize="@dimen/text_medium"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/tv_reminder_time"/>
+
+                    <TextView
+                        android:id="@+id/tv_reminder_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="01-01-01 00:00:00"
+                        android:textSize="@dimen/text_small"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_reminder_title"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/tv_reminder_countdown"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="00 jam 00 menit 00 detik"
+                        android:textSize="@dimen/text_medium"
+                        android:textColor="@color/color_accent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_reminder_title"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_medium">
+
+<!--                    <Button-->
+<!--                        android:id="@+id/layout_menu_tutorial"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:padding="16dp"-->
+<!--                        android:background=""-->
+<!--                        android:text="Tutorial"-->
+<!--                        android:textSize="@dimen/text_medium"-->
+<!--                        android:textColor="@color/color_secondary"-->
+<!--                        android:drawableTop="@drawable/ic_menu_tutorial"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintEnd_toStartOf="@id/layout_menu_reminder"/>-->
+
+                    <LinearLayout
+                        android:id="@+id/layout_menu_tutorial"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/layout_menu_reminder">
+
+                        <ImageView
+                            android:layout_width="65dp"
+                            android:layout_height="65dp"
+                            android:src="@drawable/ic_menu_tutorial"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tutorial"
+                            android:textSize="@dimen/text_medium"
+                            android:textStyle="bold"
+                            android:textColor="@color/color_secondary"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout_menu_reminder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/layout_menu_tutorial"
+                        app:layout_constraintEnd_toStartOf="@id/layout_menu_lokasi">
+
+                        <ImageView
+                            android:layout_width="65dp"
+                            android:layout_height="65dp"
+                            android:src="@drawable/ic_menu_reminder"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Reminder"
+                            android:textSize="@dimen/text_medium"
+                            android:textStyle="bold"
+                            android:textColor="@color/color_secondary"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout_menu_lokasi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/layout_menu_reminder"
+                        app:layout_constraintEnd_toEndOf="parent">
+
+                        <ImageView
+                            android:layout_width="65dp"
+                            android:layout_height="65dp"
+                            android:src="@drawable/ic_menu_lokasi2"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Lokasi RS"
+                            android:textSize="@dimen/text_medium"
+                            android:textStyle="bold"
+                            android:textColor="@color/color_secondary"/>
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:layout_marginBottom="@dimen/margin_small">
+
+                        <TextView
+                            android:id="@+id/tv_menu_information"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Informasi >>"
+                            android:textSize="@dimen/text_medium"
+                            android:textStyle="bold"
+                            android:textColor="@color/color_secondary" />
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_item_information"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <ImageView
+            android:id="@+id/bt_chat"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_margin="@dimen/margin_medium"
+            android:src="@drawable/ic_bubble_chat"
+            android:background="@color/color_transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
