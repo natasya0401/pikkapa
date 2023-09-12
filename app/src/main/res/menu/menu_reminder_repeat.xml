@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mi_repeat_once"
+        android:title="SATU KALI"/>
+
+    <item
+        android:id="@+id/mi_repeat_daily"
+        android:title="SETIAP HARI"/>
+
+    <item
+        android:id="@+id/mi_repeat_monday"
+        android:title="SETIAP SENIN"/>
+
+    <item
+        android:id="@+id/mi_repeat_tuesday"
+        android:title="SETIAP SELASA"/>
+
+    <item
+        android:id="@+id/mi_repeat_wednesday"
+        android:title="SETIAP RABU"/>
+
+    <item
+        android:id="@+id/mi_repeat_thursday"
+        android:title="SETIAP KAMIS"/>
+
+    <item
+        android:id="@+id/mi_repeat_friday"
+        android:title="SETIAP JUMAT"/>
+
+    <item
+        android:id="@+id/mi_repeat_saturday"
+        android:title="SETIAP SABTU"/>
+
+    <item
+        android:id="@+id/mi_repeat_sunday"
+        android:title="SETIAP MINGGU"/>
+
+</menu>

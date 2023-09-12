@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.LocationDetailActivity"
+        android:background="@color/color_background">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/item_toolbar"/>
+
+        <TextView
+            android:id="@+id/tv_location_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rumah Sakit"
+            android:textSize="@dimen/text_normal"
+            android:textStyle="bold"
+            android:textColor="@color/color_primary_dark"
+            android:layout_marginTop="@dimen/margin_small"
+            android:paddingHorizontal="@dimen/margin_small"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_location_cp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CP (081234567890)"
+            android:textSize="@dimen/text_medium"
+            android:textStyle="bold"
+            android:textColor="@color/color_primary_dark"
+            android:paddingHorizontal="@dimen/margin_small"
+            app:layout_constraintTop_toBottomOf="@id/tv_location_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_location_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jl. Nama Jalan Menuju Suatu Tempat No. 1, Malang, Jawa Timur"
+            android:textSize="@dimen/text_medium"
+            android:textStyle="bold"
+            android:textColor="@color/color_primary_dark"
+            android:paddingHorizontal="@dimen/margin_small"
+            app:layout_constraintTop_toBottomOf="@id/tv_location_cp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <FrameLayout
+            android:id="@+id/layout_maps"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/margin_medium"
+            app:layout_constraintTop_toBottomOf="@id/tv_location_detail"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

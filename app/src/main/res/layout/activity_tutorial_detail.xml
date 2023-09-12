@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.TutorialDetailActivity"
+        android:background="@color/color_background">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/item_toolbar"/>
+
+        <TextView
+            android:id="@+id/tv_tutorial_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:text="Tutorial Title"
+            android:gravity="center"
+            android:textSize="@dimen/text_normal"
+            android:textStyle="bold"
+            android:textColor="@color/color_secondary"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+        <TextView
+            android:id="@+id/tv_tutorial_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_small"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vitae elit quis purus facilisis suscipit. Praesent porttitor tincidunt lacus eu consequat. Sed vitae nunc purus."
+            android:textSize="@dimen/text_small"
+            android:textStyle="bold"
+            android:textColor="@color/color_secondary"
+            app:layout_constraintTop_toBottomOf="@id/tv_tutorial_title" />
+
+        <WebView
+            android:id="@+id/webview_tutorial"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/margin_medium"
+            app:layout_constraintTop_toBottomOf="@id/tv_tutorial_detail"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
