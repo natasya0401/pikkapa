@@ -43,7 +43,7 @@ class InformationDetailActivity : AppCompatActivity() {
 
 
         val webStr =
-            "<html><body><iframe width=\"380\" height=\"315\" src=\"$web\" frameborder=\"0\" allowfullscreen></iframe></body></html>"
+            "<html><body><iframe width=\"380\" height=\"1000\" src=\"$web\" frameborder=\"0\" allowfullscreen></iframe></body></html>"
 
         Log.d("url", web)
         val webview = findViewById<View>(R.id.webview) as WebView
