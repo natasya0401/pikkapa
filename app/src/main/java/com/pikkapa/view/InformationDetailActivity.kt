@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.pikkapa.R
@@ -44,6 +45,7 @@ class InformationDetailActivity : AppCompatActivity() {
 
         val webStr =
             "<html><body><iframe width=\"380\" height=\"1000\" src=\"$web\" frameborder=\"0\" allowfullscreen></iframe></body></html>"
+
 
         Log.d("url", web)
         val webview = findViewById<View>(R.id.webview) as WebView
