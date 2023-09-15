@@ -1,5 +1,6 @@
 package com.pikkapa.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -42,6 +43,15 @@ class InformationDetailActivity : AppCompatActivity() {
 //            Log.d("html", "ada title")
 //        }
 
+        binding.footer.ivBack.setOnClickListener {
+            val myIntent = Intent(this, InformationActivity::class.java)
+            this.startActivity(myIntent)
+        }
+
+        binding.footer.ivHome.setOnClickListener {
+            val myIntent = Intent(this, HomeActivity::class.java)
+            this.startActivity(myIntent)
+        }
 
         val webStr =
             "<html><body><iframe width=\"380\" height=\"1000\" src=\"$web\" frameborder=\"0\" allowfullscreen></iframe></body></html>"

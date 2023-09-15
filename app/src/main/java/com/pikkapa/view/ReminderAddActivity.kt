@@ -126,6 +126,16 @@ class ReminderAddActivity : AppCompatActivity() {
             popup.show()
         }
 
+        binding.footer.ivBack.setOnClickListener {
+            val myIntent = Intent(this, ReminderActivity::class.java)
+            this.startActivity(myIntent)
+        }
+
+        binding.footer.ivHome.setOnClickListener {
+            val myIntent = Intent(this, HomeActivity::class.java)
+            this.startActivity(myIntent)
+        }
+
 
         //set time picker
         var onTimeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, i, i2 ->

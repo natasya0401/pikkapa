@@ -18,6 +18,7 @@
             layout="@layout/item_toolbar"/>
 
 
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_searchbar"
             android:layout_width="match_parent"
@@ -75,6 +76,13 @@
             tools:layout_editor_absoluteY="-147dp"
             tools:listitem="@layout/item_information"
             app:layout_constraintTop_toBottomOf="@+id/layout_searchbar"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <include
+            android:id="@+id/footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/item_footer"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

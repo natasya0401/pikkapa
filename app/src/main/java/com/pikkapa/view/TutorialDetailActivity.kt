@@ -1,5 +1,6 @@
 package com.pikkapa.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -57,6 +58,17 @@ class TutorialDetailActivity : AppCompatActivity() {
                 return false
             }
         })
+
+        binding.footer.ivBack.setOnClickListener {
+            val myIntent = Intent(this, TutorialActivity::class.java)
+            this.startActivity(myIntent)
+        }
+
+        binding.footer.ivHome.setOnClickListener {
+            val myIntent = Intent(this, HomeActivity::class.java)
+            this.startActivity(myIntent)
+        }
+
         binding.webviewTutorial.getSettings().javaScriptEnabled = true
         binding.webviewTutorial.loadData(videoStr, "text/html", "utf-8")
     }

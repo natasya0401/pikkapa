@@ -35,6 +35,16 @@ class LocationActivity : AppCompatActivity() {
             val myIntent = Intent(this, AboutMeActivity::class.java)
             this.startActivity(myIntent)
         }
+
+        binding.footer.ivBack.setOnClickListener {
+            val myIntent = Intent(this, HomeActivity::class.java)
+            this.startActivity(myIntent)
+        }
+
+        binding.footer.ivHome.setOnClickListener {
+            val myIntent = Intent(this, HomeActivity::class.java)
+            this.startActivity(myIntent)
+        }
     }
 
     fun setAllView() {

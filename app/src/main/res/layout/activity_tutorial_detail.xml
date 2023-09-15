@@ -49,6 +49,13 @@ xmlns:tools="http://schemas.android.com/tools">
             app:layout_constraintTop_toBottomOf="@id/tv_tutorial_detail"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
+        <include
+            android:id="@+id/footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/item_footer"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

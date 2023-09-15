@@ -1,5 +1,6 @@
 package com.pikkapa.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -18,5 +19,15 @@ class ReminderDetailActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_reminder_detail)
 
         binding.toolbar.tvTitle.text = "REMINDER DETAIL"
+
+        binding.footer.ivBack.setOnClickListener {
+            val myIntent = Intent(this, ReminderActivity::class.java)
+            this.startActivity(myIntent)
+        }
+
+        binding.footer.ivHome.setOnClickListener {
+            val myIntent = Intent(this, HomeActivity::class.java)
+            this.startActivity(myIntent)
+        }
     }
 }
