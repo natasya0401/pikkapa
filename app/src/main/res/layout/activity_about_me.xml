@@ -15,7 +15,10 @@
 
         <include
             android:id="@+id/toolbar"
-            layout="@layout/item_toolbar"/>
+            layout="@layout/item_toolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="70dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

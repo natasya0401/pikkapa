@@ -35,6 +35,9 @@ class AboutMeActivity : AppCompatActivity() {
             val myIntent = Intent(this, AboutMeActivity::class.java)
             this.startActivity(myIntent)
         }
+
+//        binding.toolbar.btnBack
+
     }
 
     fun setAllView() {
