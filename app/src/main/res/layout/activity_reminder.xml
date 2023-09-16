@@ -42,10 +42,9 @@
             android:id="@+id/bt_reminder_add"
             android:layout_width="65dp"
             android:layout_height="65dp"
-            android:layout_margin="@dimen/margin_medium"
             android:src="@drawable/ic_add_circle_fill"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintBottom_toTopOf="@id/footer"
+            app:layout_constraintEnd_toEndOf="@id/footer"/>
 
         <include
             android:id="@+id/footer"
