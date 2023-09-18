@@ -18,7 +18,7 @@
             layout="@layout/item_toolbar"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_item_reminder"
+            android:id="@+id/rv_item_location"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             tools:itemCount="20"
