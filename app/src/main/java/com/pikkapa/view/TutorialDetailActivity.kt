@@ -32,7 +32,7 @@ class TutorialDetailActivity : AppCompatActivity() {
             Log.d("html", data)
         }
 
-        if(intent.hasExtra("title")) {
+        if(intent.hasExtra("title")) { 
             binding.tvTutorialTitle.text = intent.getStringExtra("title")
             Log.d("html", "ada title")
         }

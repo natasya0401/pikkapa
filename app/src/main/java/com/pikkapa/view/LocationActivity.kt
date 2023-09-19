@@ -27,9 +27,9 @@ class LocationActivity : AppCompatActivity() {
         setAllView()
         setAllOnClick()
 
-        locations.add(LocationEntity("Rumah Sakit 1", "Jl. Lokasi Rumah Sakit 1", "085123456789", "-7.986460744282259", "112.62498358864043"))
-        locations.add(LocationEntity("Rumah Sakit 2", "Jl. Lokasi Rumah Sakit 2", "085123456789", "-7.986460744282259", "112.62498358864043"))
-        locations.add(LocationEntity("Rumah Sakit 3", "Jl. Lokasi Rumah Sakit 3", "085123456789", "-7.986460744282259", "112.62498358864043"))
+        locations.add(LocationEntity("Rumah Sakit 1", "Jl. Lokasi Rumah Sakit 1", "085123456789", "-7.95678280671865", "112.58977623771564"))
+        locations.add(LocationEntity("Rumah Sakit 2", "Jl. Lokasi Rumah Sakit 2", "085123456789", "-7.994110125108967", "112.63401518004514"))
+        locations.add(LocationEntity("Rumah Sakit 3", "Jl. Lokasi Rumah Sakit 3", "085123456789", "-7.986280123048572", "112.62486020703189"))
         locations.add(LocationEntity("Rumah Sakit 4", "Jl. Lokasi Rumah Sakit 4", "085123456789", "-7.986460744282259", "112.62498358864043"))
         locations.add(LocationEntity("Rumah Sakit 5", "Jl. Lokasi Rumah Sakit 5", "085123456789", "-7.986460744282259", "112.62498358864043"))
 

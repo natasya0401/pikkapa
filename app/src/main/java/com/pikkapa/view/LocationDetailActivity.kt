@@ -6,14 +6,22 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.databinding.DataBindingUtil
+import com.google.android.gms.maps.*
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.pikkapa.R
 import com.pikkapa.databinding.ActivityInformationDetailBinding
 import com.pikkapa.databinding.ActivityLocationDetailBinding
 import kotlin.math.log
 
-class LocationDetailActivity : AppCompatActivity() {
-
+class LocationDetailActivity : AppCompatActivity(), OnMapReadyCallback {
+    private var mMap: GoogleMap? = null
     private lateinit var binding : ActivityLocationDetailBinding
+
+    private var lttd = 51.5074 // Default latitude (e.g., London)
+    private var lgtd = -0.1278 // Default longitude (e.g., London)
+
+    private var title = "LOKASI RS"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_location_detail)
@@ -22,7 +30,7 @@ class LocationDetailActivity : AppCompatActivity() {
 
 
         binding.footer.ivBack.setOnClickListener {
-            val myIntent = Intent(this, TutorialActivity::class.java)
+            val myIntent = Intent(this, LocationActivity::class.java)
             this.startActivity(myIntent)
         }
 
@@ -32,12 +40,11 @@ class LocationDetailActivity : AppCompatActivity() {
             val myIntent = Intent(this, HomeActivity::class.java)
             this.startActivity(myIntent)
         }
-        var lgtd = "-7.99409950053184"
-        var lttd = "112.63405809538726"
 
 
         if (intent.hasExtra("title")) {
             binding.tvLocationTitle.text = intent.getStringExtra("title")
+            title = intent.getStringExtra("title").toString()
             Log.d("title", "ada title")
         }
 
@@ -52,15 +59,30 @@ class LocationDetailActivity : AppCompatActivity() {
         }
 
         if (intent.hasExtra("longitude")) {
-            lgtd = intent.getStringExtra("longitude").toString()
-            Log.d("longitude", lgtd)
+            lgtd = intent.getStringExtra("longitude").toString().toDouble()
         }
 
         if (intent.hasExtra("latitude")) {
-            lttd = intent.getStringExtra("latitude").toString()
-            Log.d("longitude", lttd)
+            lttd = intent.getStringExtra("latitude").toString().toDouble()
         }
 
-        val maps = findViewById<View>(R.id.layout_maps)
+
+        val mapFragment = binding.mapView
+        mapFragment.onCreate(savedInstanceState)
+        mapFragment.getMapAsync(this)
+
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
+
+        val coordinate = LatLng(lgtd, lttd)
+        mMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinate, 15f))
+        mMap?.uiSettings?.isScrollGesturesEnabled = true
+        mMap?.uiSettings?.isZoomControlsEnabled = true
+        mMap?.uiSettings?.isZoomGesturesEnabled = true
+        mMap?.addMarker(MarkerOptions().position(coordinate).title(title))
+        mMap?.moveCamera(CameraUpdateFactory.newLatLng(coordinate))
+
     }
 }
