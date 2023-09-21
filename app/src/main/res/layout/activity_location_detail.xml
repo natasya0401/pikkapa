@@ -57,11 +57,30 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
+<!--        <FrameLayout-->
+<!--            android:id="@+id/layout_maps"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_marginTop="@dimen/margin_medium"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/tv_location_detail"-->
+<!--            app:layout_constraintBottom_toTopOf="@id/footer">-->
+
+
+<!--            <com.google.android.gms.maps.MapView-->
+<!--                android:id="@+id/mapView"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:name="com.google.android.gms.maps.SupportMapFragment"-->
+<!--                app:liteMode="false"-->
+<!--                app:mapType="normal"-->
+<!--                app:cameraZoom="15"/>-->
+<!--        </FrameLayout>-->
+
         <FrameLayout
             android:id="@+id/layout_maps"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginTop="25dp"
             app:layout_constraintTop_toBottomOf="@id/tv_location_detail"
             app:layout_constraintBottom_toTopOf="@id/footer">
 
@@ -74,6 +93,8 @@
                 app:mapType="normal"
                 app:cameraZoom="15"/>
         </FrameLayout>
+
+
 
         <include
             android:id="@+id/footer"
