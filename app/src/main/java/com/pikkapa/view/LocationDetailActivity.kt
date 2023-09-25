@@ -77,9 +77,9 @@ class LocationDetailActivity : AppCompatActivity(), OnMapReadyCallback {
             lttd = intent.getStringExtra("latitude").toString().toDouble()
         }
 
-//        val mapFragment = binding.mapView
-//        mapFragment.onCreate(savedInstanceState)
-//        mapFragment.getMapAsync(this)
+        val mapFragment = binding.mapView
+        mapFragment.onCreate(savedInstanceState)
+        mapFragment.getMapAsync(this)
 
 //        val mapFragment = supportFragmentManager.findFragmentById(R.id.mapView) as SupportMapFragment
 //        mapView = mapFragment.view as MapView
@@ -101,19 +101,19 @@ class LocationDetailActivity : AppCompatActivity(), OnMapReadyCallback {
 
     }
 
-    override fun onResume() {
-        super.onResume()
-        mapView.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        mapView.onPause()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        mapView.onDestroy()
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        mapView.onResume()
+//    }
+//
+//    override fun onPause() {
+//        super.onPause()
+//        mapView.onPause()
+//    }
+//
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        mapView.onDestroy()
+//    }
 
 }
