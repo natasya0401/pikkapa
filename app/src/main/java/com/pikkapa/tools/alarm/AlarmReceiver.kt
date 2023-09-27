@@ -30,7 +30,7 @@ class AlarmReceiver: BroadcastReceiver() {
             val message = intent?.getStringExtra("message") ?: return
             val id = intent?.getStringExtra("alarmId") ?: return
             createNotificationChanel("reminder")
-            sendNotification(title, "reminder", getNextNotificationId(context), message)
+            sendNotification(title, "reminder", id.toInt(), message)
             val reminderAccess = ReminderAccess(this.context)
             reminderAccess.delete(id.toInt())
             println("Alarm triggered: $message")

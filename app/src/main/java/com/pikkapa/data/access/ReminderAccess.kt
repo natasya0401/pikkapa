@@ -12,7 +12,7 @@ open class ReminderAccess(context: Context) : DBBase(context) {
     companion object {
         private const val table = "t_reminder"
         const val createQuery = "CREATE TABLE $table" +
-                " (`id` INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                " (`id` INTEGER PRIMARY KEY NOT NULL, " +
                 " `title` VARCHAR(100) NOT NULL, " +
                 " `notes` TEXT NOT NULL, " +
                 " `time` VARCHAR(100) NOT NULL, " +
@@ -27,9 +27,9 @@ open class ReminderAccess(context: Context) : DBBase(context) {
 
         const val dropQuery = "DROP TABLE IF EXISTS $table"
         private const val insertOrReplaceQuery = "INSERT OR REPLACE INTO $table (" +
-                " 'title', 'notes', 'time', 'date', 'repeat_daily', " +
+                " 'id', 'title', 'notes', 'time', 'date', 'repeat_daily', " +
                 " 'repeat_weekly', 'repeat_weekly_day', 'repeat_custom', 'repeat_custom_days', 'alarm_ids')  " +
-                " VALUES ( ?, ?, ?, ?, ?, " +
+                " VALUES ( ?, ?, ?, ?, ?, ?, " +
                 " ?, ?, ?, ?, ?) "
     }
 
@@ -40,8 +40,8 @@ open class ReminderAccess(context: Context) : DBBase(context) {
         val query = "SELECT * FROM $table"
         val cursor: Cursor = database.rawQuery(query, arrayOf<String>())
         cursor.moveToFirst()
-        while (cursor.moveToNext()) {
-//            try {
+        do {
+            try {
                 var i = 0
                 val reminderEntity = ReminderEntity()
 
@@ -91,10 +91,10 @@ open class ReminderAccess(context: Context) : DBBase(context) {
                 ).split(",")
 
                 rtn.add(reminderEntity)
-//            } catch (e: java.lang.Exception) {
-//
-//            }
-        }
+            } catch (e: java.lang.Exception) {
+
+            }
+        } while (cursor.moveToNext())
 
         cursor.close()
         close()
@@ -111,6 +111,7 @@ open class ReminderAccess(context: Context) : DBBase(context) {
         val statement: SQLiteStatement = database.compileStatement(insertOrReplaceQuery)
         var i = 1
 
+        statement.bindLong(i++, reminderEntity.id.toLong())
         statement.bindString(i++, reminderEntity.title)
         statement.bindString(i++, reminderEntity.notes)
         statement.bindString(i++, reminderEntity.time)

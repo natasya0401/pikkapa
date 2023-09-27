@@ -22,7 +22,7 @@ class AndroidAlarmScheduler(
         val intent = Intent(context, AlarmReceiver::class.java).apply {
             putExtra("title", item.title)
             putExtra("message", item.message)
-            putExtra("alarmId", item.id)
+            putExtra("alarmId", item.id.toString())
         }
 
         var times = item.time.split(":")

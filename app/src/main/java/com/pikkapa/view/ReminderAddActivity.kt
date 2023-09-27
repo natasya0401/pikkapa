@@ -209,7 +209,7 @@ class ReminderAddActivity : AppCompatActivity() {
             var notes = binding.etReminderNotes.text.toString()
 
             if(title.isBlank() || title.isNullOrEmpty()) {
-                Toast.makeText(this, "Anda belum menuliskan judul", Toast.LENGTH_LONG)
+                Toast.makeText(this, "Anda belum menuliskan judul", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
@@ -218,7 +218,7 @@ class ReminderAddActivity : AppCompatActivity() {
             }
 
             if(timePick.equals("")) {
-                Toast.makeText(this, "Anda belum memilih jam", Toast.LENGTH_LONG)
+                Toast.makeText(this, "Anda belum memilih jam", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
@@ -248,7 +248,7 @@ class ReminderAddActivity : AppCompatActivity() {
             var alarmItem = AlarmItem(latestAlarmId, timePick, datePick, repeatePick, title, notes)
 
             var data = ReminderEntity(
-                0,
+                latestAlarmId,
                 title,
                 notes,
                 timePick,
@@ -294,11 +294,11 @@ class ReminderAddActivity : AppCompatActivity() {
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val time = getTime()
 
-        alarmManager.setExact(
-            AlarmManager.RTC_WAKEUP,
-            time,
-            pendingIntent
-        )
+//        alarmManager.setExact(
+//            AlarmManager.RTC_WAKEUP,
+//            time,
+//            pendingIntent
+//        )
     }
 
     private fun getTime(): Long {
