@@ -24,7 +24,7 @@ xmlns:tools="http://schemas.android.com/tools">
             app:layout_constraintTop_toBottomOf="@id/toolbar">
 
             <TextView
-                android:id="@+id/tv_reminder_title"
+                android:id="@+id/tv_reminder_title_judul"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Judul"
@@ -32,8 +32,8 @@ xmlns:tools="http://schemas.android.com/tools">
                 android:textColor="@color/color_secondary"
                 app:layout_constraintTop_toTopOf="parent"/>
 
-            <EditText
-                android:id="@+id/et_reminder_title"
+            <TextView
+                android:id="@+id/tv_reminder_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="..."
@@ -42,20 +42,20 @@ xmlns:tools="http://schemas.android.com/tools">
                 android:textColorHint="@color/color_primary"
                 android:background="@drawable/bg_square_white"
                 android:paddingHorizontal="@dimen/margin_mini"
-                app:layout_constraintTop_toBottomOf="@id/tv_reminder_title"/>
+                app:layout_constraintTop_toBottomOf="@id/tv_reminder_title_judul"/>
 
             <TextView
-                android:id="@+id/tv_reminder_notes"
+                android:id="@+id/tv_reminder_notes_catatan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Catatan"
                 android:textSize="@dimen/text_medium"
                 android:textColor="@color/color_secondary"
                 android:layout_marginTop="@dimen/margin_medium"
-                app:layout_constraintTop_toBottomOf="@id/et_reminder_title"/>
+                app:layout_constraintTop_toBottomOf="@id/tv_reminder_title"/>
 
-            <EditText
-                android:id="@+id/et_reminder_notes"
+            <TextView
+                android:id="@+id/tv_reminder_notes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="..."
@@ -64,7 +64,7 @@ xmlns:tools="http://schemas.android.com/tools">
                 android:textColorHint="@color/color_primary"
                 android:background="@drawable/bg_square_white"
                 android:paddingHorizontal="@dimen/margin_mini"
-                app:layout_constraintTop_toBottomOf="@id/tv_reminder_notes"/>
+                app:layout_constraintTop_toBottomOf="@id/tv_reminder_notes_catatan"/>
 
             <TextView
                 android:id="@+id/tv_reminder_time"
@@ -74,7 +74,7 @@ xmlns:tools="http://schemas.android.com/tools">
                 android:textSize="@dimen/text_medium"
                 android:textColor="@color/color_secondary"
                 android:layout_marginTop="@dimen/margin_medium"
-                app:layout_constraintTop_toBottomOf="@id/et_reminder_notes"
+                app:layout_constraintTop_toBottomOf="@id/tv_reminder_notes"
                 app:layout_constraintBottom_toBottomOf="@id/bt_reminder_time_picker"
                 app:layout_constraintStart_toStartOf="parent"/>
 
@@ -90,7 +90,7 @@ xmlns:tools="http://schemas.android.com/tools">
                 android:paddingHorizontal="@dimen/margin_mini"
                 android:paddingTop="@dimen/margin_micro"
                 android:layout_marginTop="@dimen/margin_medium"
-                app:layout_constraintTop_toBottomOf="@id/et_reminder_notes"
+                app:layout_constraintTop_toBottomOf="@id/tv_reminder_notes"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
             <TextView
@@ -174,10 +174,10 @@ xmlns:tools="http://schemas.android.com/tools">
 
 
             <TextView
-                android:id="@+id/bt_reminder_cancel"
+                android:id="@+id/bt_reminder_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="BATAL"
+                android:text="HAPUS"
                 android:textSize="@dimen/text_medium"
                 android:textColor="@color/white"
                 android:background="@drawable/bg_square_primarycolor"
@@ -186,22 +186,22 @@ xmlns:tools="http://schemas.android.com/tools">
                 android:layout_marginTop="@dimen/margin_huge"
                 app:layout_constraintTop_toBottomOf="@id/tv_reminder_date"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/bt_reminder_save"/>
-
-            <TextView
-                android:id="@+id/bt_reminder_save"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="SIMPAN"
-                android:textSize="@dimen/text_medium"
-                android:textColor="@color/white"
-                android:background="@drawable/bg_square_secondarycolor"
-                android:paddingHorizontal="@dimen/margin_medium"
-                android:paddingVertical="@dimen/margin_micro"
-                android:layout_marginTop="@dimen/margin_huge"
-                app:layout_constraintTop_toBottomOf="@id/tv_reminder_date"
-                app:layout_constraintStart_toEndOf="@id/bt_reminder_cancel"
                 app:layout_constraintEnd_toEndOf="parent"/>
+
+<!--            <TextView-->
+<!--                android:id="@+id/bt_reminder_save"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="SIMPAN"-->
+<!--                android:textSize="@dimen/text_medium"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:background="@drawable/bg_square_secondarycolor"-->
+<!--                android:paddingHorizontal="@dimen/margin_medium"-->
+<!--                android:paddingVertical="@dimen/margin_micro"-->
+<!--                android:layout_marginTop="@dimen/margin_huge"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/tv_reminder_date"-->
+<!--                app:layout_constraintStart_toEndOf="@id/bt_reminder_cancel"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"/>-->
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

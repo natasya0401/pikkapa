@@ -208,6 +208,10 @@ class ReminderAddActivity : AppCompatActivity() {
             var title = binding.etReminderTitle.text.toString()
             var notes = binding.etReminderNotes.text.toString()
 
+//            val myIntent = Intent(this, ReminderDetailActivity::class.java)
+//            myIntent.putExtra("title", title)
+//            myIntent.putExtra("notes", notes)
+
             if(title.isBlank() || title.isNullOrEmpty()) {
                 Toast.makeText(this, "Anda belum menuliskan judul", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
@@ -273,86 +277,6 @@ class ReminderAddActivity : AppCompatActivity() {
             }
             dialog.setCanceledOnTouchOutside(true)
             dialog.show()
-
-//            scheduleNotification()
         }
     }
-    private fun scheduleNotification() {
-        val intent = Intent(applicationContext, Notification::class.java)
-        val title = binding.etReminderTitle.text.toString()
-        val message = binding.etReminderNotes.text.toString()
-        intent.putExtra(titleExtra, title)
-        intent.putExtra(messageExtra, message)
-
-        val pendingIntent = PendingIntent.getBroadcast(
-            applicationContext,
-            notificationID,
-            intent,
-            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-        )
-
-        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val time = getTime()
-
-//        alarmManager.setExact(
-//            AlarmManager.RTC_WAKEUP,
-//            time,
-//            pendingIntent
-//        )
-    }
-
-    private fun getTime(): Long {
-        var onTimeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, i, i2 ->
-            var jam = "$i"
-            var menit = "$i2"
-
-            if(i<10) {
-                jam = "0$i"
-            }
-
-            if(i2<10) {
-                menit = "0$i2"
-            }
-
-            timePick = "$jam:$menit"
-
-            binding.btReminderTimePicker.text = timePick
-        }
-
-        var timePickerDialog = TimePickerDialog(this, onTimeSetListener, 0, 0, true)
-        timePickerDialog.setTitle("Pilih Waktu")
-
-        var sdf = SimpleDateFormat("yyyy-MM-dd")
-        datePick = sdf.format(Date())
-        binding.tvReminderDatePicker.text = datePick
-        var onDateSetListener = DatePickerDialog.OnDateSetListener { datePicker, i, i2, i3 ->
-            datePick = "$i-${i2+1}-$i3"
-            binding.tvReminderDatePicker.text = datePick
-        }
-
-        var calendar = Calendar.getInstance()
-        calendar.time = Date()
-
-        var datePickerDialog = DatePickerDialog(this, onDateSetListener,
-            calendar.get(Calendar.YEAR),
-            calendar.get(Calendar.MONTH),
-            calendar.get(Calendar.DAY_OF_MONTH))
-        datePickerDialog.setTitle("Pilih Tanggal")
-        return calendar.timeInMillis
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun createNotificationChannel() {
-        val name = "notif channel"
-        val desc = "desc of the channel"
-        val importance = NotificationManager.IMPORTANCE_HIGH
-        val channel = NotificationChannel(channelID, name, importance)
-        channel.description = desc
-
-        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-        notificationManager.createNotificationChannel(channel)
-
-    }
-
-
 }

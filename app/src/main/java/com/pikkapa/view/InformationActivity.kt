@@ -31,10 +31,10 @@ class InformationActivity : AppCompatActivity() {
         setAllOnClick()
 
         informations.add(InformationEntity("judul 1", "ini adalah foto orang peace di pantai", "gambar 1", "https://www.lipsum.com/"))
-        informations.add(InformationEntity("judul 2","ini adalah foto orang peace di pantai", "https://drive.google.com/uc?id=1KVZrjyCNZkf66WdDVBBf3brMH3ca4F51"))
-        informations.add(InformationEntity("judul 3", "ini adalah foto orang peace di pantai", "https://docs.google.com/uc?id=1KVZrjyCNZkf66WdDVBBf3brMH3ca4F51"))
-        informations.add(InformationEntity("judul 4", "ini adalah foto orang peace di pantai", "https://docs.google.com/uc?id=1KVZrjyCNZkf66WdDVBBf3brMH3ca4F51"))
-        informations.add(InformationEntity("judul 5","ini adalah foto orang peace di pantai", "https://docs.google.com/uc?id=1KVZrjyCNZkf66WdDVBBf3brMH3ca4F51"
+        informations.add(InformationEntity("judul 2","ini adalah foto orang peace di pantai", "https://drive.google.com/uc?id=1KVZrjyCNZkf66WdDVBBf3brMH3ca4F51", "https://www.lipsum.com/"))
+        informations.add(InformationEntity("judul 3", "ini adalah foto orang peace di pantai", "https://docs.google.com/uc?id=1KVZrjyCNZkf66WdDVBBf3brMH3ca4F51", "https://www.lipsum.com/"))
+        informations.add(InformationEntity("judul 4", "ini adalah foto orang peace di pantai", "https://docs.google.com/uc?id=1KVZrjyCNZkf66WdDVBBf3brMH3ca4F51", "https://www.lipsum.com/"))
+        informations.add(InformationEntity("judul 5","ini adalah foto orang peace di pantai", "https://docs.google.com/uc?id=1KVZrjyCNZkf66WdDVBBf3brMH3ca4F51", "https://www.lipsum.com/"))
 //            , "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n" +
 //                "<head>\n" +
 //                "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n" +
@@ -139,7 +139,6 @@ class InformationActivity : AppCompatActivity() {
 //                "             \n" +
 //                "</body>\n" +
 //                "</html>"
-        ))
 
         binding.rvItemInformation.layoutManager = LinearLayoutManager(this)
         binding.rvItemInformation.adapter = InformationItemAdapter(informations, true) {

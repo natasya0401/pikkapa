@@ -169,4 +169,74 @@ open class ReminderAccess(context: Context) : DBBase(context) {
 
     }
 
+    fun getById(id:Int):ReminderEntity {
+        var rtn: ReminderEntity = ReminderEntity()
+        open()
+
+        val query = "SELECT * FROM $table WHERE id = $id"
+        val cursor: Cursor = database.rawQuery(query, arrayOf<String>())
+        cursor.moveToFirst()
+        do {
+            try {
+                var i = 0
+                val reminderEntity = ReminderEntity()
+
+                reminderEntity.id = cursor.getInt(if(cursor.getColumnIndex("id")==-1) 0 else {
+                    cursor.getColumnIndex("id")
+                }
+                )
+                reminderEntity.title = cursor.getString(if(cursor.getColumnIndex("title")==-1) 0 else {
+                    cursor.getColumnIndex("title")
+                }
+                )
+                reminderEntity.notes = cursor.getString(if(cursor.getColumnIndex("notes")==-1) 0 else {
+                    cursor.getColumnIndex("notes")
+                }
+                )
+                reminderEntity.time = cursor.getString(if(cursor.getColumnIndex("time")==-1) 0 else {
+                    cursor.getColumnIndex("time")
+                }
+                )
+                reminderEntity.date = cursor.getString(if(cursor.getColumnIndex("date")==-1) 0 else {
+                    cursor.getColumnIndex("date")
+                }
+                )
+                reminderEntity.repeatDaily = cursor.getInt(if(cursor.getColumnIndex("repeat_daily")==-1) 0 else {
+                    cursor.getColumnIndex("repeat_daily")
+                }
+                ) == 1
+                reminderEntity.repeatWeekly = 1 == cursor.getInt(if(cursor.getColumnIndex("repeat_weekly")==-1) 0 else {
+                    cursor.getColumnIndex("repeat_weekly")
+                }
+                )
+                reminderEntity.repeatWeeklyDay = cursor.getString(if(cursor.getColumnIndex("repeat_weekly_day")==-1) 0 else {
+                    cursor.getColumnIndex("repeat_weekly_day")
+                }
+                )
+                reminderEntity.repeatCustom = cursor.getInt(if(cursor.getColumnIndex("repeat_custom")==-1) 0 else {
+                    cursor.getColumnIndex("repeat_custom")
+                }
+                ) == 1
+                reminderEntity.repeatCustomDays = cursor.getString(if(cursor.getColumnIndex("repeat_custom_days")==-1) 0 else {
+                    cursor.getColumnIndex("repeat_custom_days")
+                }
+                ).split(",")
+                reminderEntity.alarmIds = cursor.getString(if(cursor.getColumnIndex("alarm_ids")==-1) 0 else {
+                    cursor.getColumnIndex("alarm_ids")
+                }
+                ).split(",")
+
+                rtn = reminderEntity
+            } catch (e: java.lang.Exception) {
+
+            }
+        } while (cursor.moveToNext())
+
+        cursor.close()
+        close()
+
+        return rtn
+
+    }
+
 }
