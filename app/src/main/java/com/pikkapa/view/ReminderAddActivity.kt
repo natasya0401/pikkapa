@@ -197,83 +197,85 @@ class ReminderAddActivity : AppCompatActivity() {
             dialog.show()
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            createNotificationChannel()
-        }
-
-        binding.btReminderSave.setOnClickListener { scheduleNotification() }
-
-
-//        binding.btReminderSave.setOnClickListener {
-//            var title = binding.etReminderTitle.text.toString()
-//            var notes = binding.etReminderNotes.text.toString()
-//
-//            if(title.isBlank() || title.isNullOrEmpty()) {
-//                Toast.makeText(this, "Anda belum menuliskan judul", Toast.LENGTH_LONG)
-//                return@setOnClickListener
-//            }
-//
-//            if(notes.isBlank() || notes.isNullOrEmpty()) {
-//                notes = title
-//            }
-//
-//            if(timePick.equals("")) {
-//                Toast.makeText(this, "Anda belum memilih jam", Toast.LENGTH_LONG)
-//                return@setOnClickListener
-//            }
-//
-//            val permissionState =
-//                ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
-//            if (permissionState == PackageManager.PERMISSION_DENIED) {
-//                ActivityCompat.requestPermissions(
-//                    this,
-//                    arrayOf(Manifest.permission.POST_NOTIFICATIONS),
-//                    1
-//                )
-//                return@setOnClickListener
-//            }
-//
-//            val reminderAccess = ReminderAccess(this)
-//
-//            var latestAlarmId = reminderAccess.getLatestId()
-//
-////            if(latestAlarmId==0) {
-////                Toast.makeText(this, "Gagal membuat alarm", Toast.LENGTH_LONG)
-////                return@setOnClickListener
-////            }
-//
-//            latestAlarmId+=1
-//
-//            var alarmScheduler = AndroidAlarmScheduler(this)
-//            var alarmItem = AlarmItem(latestAlarmId, timePick, datePick, repeatePick, title, notes)
-//
-//            var data = ReminderEntity(
-//                0,
-//                title,
-//                notes,
-//                timePick,
-//                datePick,
-//                repeatePick.equals("SATU KALI"),
-//                !repeatePick.equals("SATU KALI"),
-//                if(!repeatePick.equals("SATU KALI")) repeatePick.split(" ")[1] else "",
-//                false,
-//                arrayListOf(""),
-//                arrayListOf("$latestAlarmId")
-//            )
-//
-//            var dialog = DialogBase(this, "Yakin ingin simpan?", "SIMPAN", "BATAL") {
-//                //simpan reminder
-//                if(repeatePick.equals("SATU KALI")) alarmScheduler.schedule(alarmItem, false)
-//                else alarmScheduler.schedule(alarmItem, true)
-//
-//                reminderAccess.insert(data)
-//
-//                this@ReminderAddActivity.finish()
-//                it.dismiss()
-//            }
-//            dialog.setCanceledOnTouchOutside(true)
-//            dialog.show()
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            createNotificationChannel()
 //        }
+
+//        binding.btReminderSave.setOnClickListener { scheduleNotification() }
+
+
+        binding.btReminderSave.setOnClickListener {
+            var title = binding.etReminderTitle.text.toString()
+            var notes = binding.etReminderNotes.text.toString()
+
+            if(title.isBlank() || title.isNullOrEmpty()) {
+                Toast.makeText(this, "Anda belum menuliskan judul", Toast.LENGTH_LONG)
+                return@setOnClickListener
+            }
+
+            if(notes.isBlank() || notes.isNullOrEmpty()) {
+                notes = title
+            }
+
+            if(timePick.equals("")) {
+                Toast.makeText(this, "Anda belum memilih jam", Toast.LENGTH_LONG)
+                return@setOnClickListener
+            }
+
+            val permissionState =
+                ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+            if (permissionState == PackageManager.PERMISSION_DENIED) {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                    1
+                )
+                return@setOnClickListener
+            }
+
+            val reminderAccess = ReminderAccess(this)
+
+            var latestAlarmId = reminderAccess.getLatestId()
+
+//            if(latestAlarmId==0) {
+//                Toast.makeText(this, "Gagal membuat alarm", Toast.LENGTH_LONG)
+//                return@setOnClickListener
+//            }
+
+            latestAlarmId+=1
+
+            var alarmScheduler = AndroidAlarmScheduler(this)
+            var alarmItem = AlarmItem(latestAlarmId, timePick, datePick, repeatePick, title, notes)
+
+            var data = ReminderEntity(
+                0,
+                title,
+                notes,
+                timePick,
+                datePick,
+                repeatePick.equals("SATU KALI"),
+                !repeatePick.equals("SATU KALI"),
+                if(!repeatePick.equals("SATU KALI")) repeatePick.split(" ")[1] else "",
+                false,
+                arrayListOf(""),
+                arrayListOf("$latestAlarmId")
+            )
+
+            var dialog = DialogBase(this, "Yakin ingin simpan?", "SIMPAN", "BATAL") {
+                //simpan reminder
+                if(repeatePick.equals("SATU KALI")) alarmScheduler.schedule(alarmItem, false)
+                else alarmScheduler.schedule(alarmItem, true)
+
+                reminderAccess.insert(data)
+
+                this@ReminderAddActivity.finish()
+                it.dismiss()
+            }
+            dialog.setCanceledOnTouchOutside(true)
+            dialog.show()
+
+//            scheduleNotification()
+        }
     }
     private fun scheduleNotification() {
         val intent = Intent(applicationContext, Notification::class.java)
