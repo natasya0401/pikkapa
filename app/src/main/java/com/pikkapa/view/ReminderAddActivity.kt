@@ -257,9 +257,9 @@ class ReminderAddActivity : AppCompatActivity() {
                 notes,
                 timePick,
                 datePick,
-                repeatePick.equals("SATU KALI"),
-                !repeatePick.equals("SATU KALI"),
-                if(!repeatePick.equals("SATU KALI")) repeatePick.split(" ")[1] else "",
+                repeatePick.equals("SETIAP HARI"),
+                !repeatePick.equals("SETIAP HARI") && !repeatePick.equals("SATU KALI"),
+                if(!repeatePick.equals("SETIAP HARI") && !repeatePick.equals("SATU KALI")) repeatePick.split(" ")[1] else "",
                 false,
                 arrayListOf(""),
                 arrayListOf("$latestAlarmId")
