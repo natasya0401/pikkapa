@@ -42,8 +42,9 @@ class LocationDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         binding.footer.ivBack.setOnClickListener {
-            val myIntent = Intent(this, LocationActivity::class.java)
-            this.startActivity(myIntent)
+//            val myIntent = Intent(this, LocationActivity::class.java)
+//            this.startActivity(myIntent)
+            onBackPressed()
         }
         binding.footer.ivHome.setOnClickListener {
             val myIntent = Intent(this, HomeActivity::class.java)

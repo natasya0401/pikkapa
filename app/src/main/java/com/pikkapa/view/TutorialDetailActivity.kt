@@ -60,8 +60,9 @@ class TutorialDetailActivity : AppCompatActivity() {
         })
 
         binding.footer.ivBack.setOnClickListener {
-            val myIntent = Intent(this, TutorialActivity::class.java)
-            this.startActivity(myIntent)
+//            val myIntent = Intent(this, TutorialActivity::class.java)
+//            this.startActivity(myIntent)
+            onBackPressed()
         }
 
         binding.footer.ivHome.setOnClickListener {

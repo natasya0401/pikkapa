@@ -89,16 +89,23 @@ class HomeActivity : AppCompatActivity() {
 
 
         //dummy
-        informations.add(InformationEntity("judul 1", "", "gambar 1"))
-        informations.add(InformationEntity("judul 2","", "https://drive.google.com/uc?id=1KVZrjyCNZkf66WdDVBBf3brMH3ca4F51"))
-        informations.add(InformationEntity("judul 3", "", "https://docs.google.com/uc?id=1KVZrjyCNZkf66WdDVBBf3brMH3ca4F51"))
-        informations.add(InformationEntity("judul 4", "", "https://docs.google.com/uc?id=1KVZrjyCNZkf66WdDVBBf3brMH3ca4F51"))
+//        informations.add(InformationEntity("judul 1", "", "gambar 1"))
+//        informations.add(InformationEntity("judul 2","", "https://drive.google.com/uc?id=1KVZrjyCNZkf66WdDVBBf3brMH3ca4F51"))
+//        informations.add(InformationEntity("judul 3", "", "https://docs.google.com/uc?id=1KVZrjyCNZkf66WdDVBBf3brMH3ca4F51"))
+//        informations.add(InformationEntity("judul 4", "", "https://docs.google.com/uc?id=1KVZrjyCNZkf66WdDVBBf3brMH3ca4F51"))
+
+        informations.add(InformationEntity("judul 1", "ini adalah foto orang peace di pantai", "gambar 1", "https://www.lipsum.com/"))
+        informations.add(InformationEntity("judul 2","ini adalah foto orang peace di pantai", "https://drive.google.com/uc?id=1KVZrjyCNZkf66WdDVBBf3brMH3ca4F51", "https://www.lipsum.com/"))
+        informations.add(InformationEntity("judul 3", "ini adalah foto orang peace di pantai", "https://docs.google.com/uc?id=1KVZrjyCNZkf66WdDVBBf3brMH3ca4F51", "https://www.lipsum.com/"))
+        informations.add(InformationEntity("judul 4", "ini adalah foto orang peace di pantai", "https://docs.google.com/uc?id=1KVZrjyCNZkf66WdDVBBf3brMH3ca4F51", "https://www.lipsum.com/"))
+        informations.add(InformationEntity("judul 5","ini adalah foto orang peace di pantai", "https://docs.google.com/uc?id=1KVZrjyCNZkf66WdDVBBf3brMH3ca4F51", "https://www.lipsum.com/"))
 
         binding.rvItemInformation.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.rvItemInformation.adapter = InformationItemAdapter(informations, false) {
             val myIntent = Intent(this, InformationDetailActivity::class.java)
             myIntent.putExtra("title", it.title)
 //            myIntent.putExtra("html", it.html)
+            myIntent.putExtra("url", it.url)
             this.startActivity(myIntent)
         }
 

@@ -44,8 +44,9 @@ class InformationDetailActivity : AppCompatActivity() {
 //        }
 
         binding.footer.ivBack.setOnClickListener {
-            val myIntent = Intent(this, InformationActivity::class.java)
-            this.startActivity(myIntent)
+//            val myIntent = Intent(this, InformationActivity::class.java)
+//            this.startActivity(myIntent)
+            onBackPressed()
         }
 
         binding.footer.ivHome.setOnClickListener {

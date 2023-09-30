@@ -128,8 +128,9 @@ class ReminderAddActivity : AppCompatActivity() {
         }
 
         binding.footer.ivBack.setOnClickListener {
-            val myIntent = Intent(this, ReminderActivity::class.java)
-            this.startActivity(myIntent)
+//            val myIntent = Intent(this, ReminderActivity::class.java)
+//            this.startActivity(myIntent)
+            onBackPressed()
         }
 
         binding.footer.ivHome.setOnClickListener {
