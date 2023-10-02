@@ -19,9 +19,6 @@
         tools:targetApi="31"
         android:usesCleartextTraffic="true">
 
-        <receiver
-            android:name=".view.Notification"
-            android:enabled="true"/>
 
         <activity
             android:name=".view.LocationDetailActivity"
