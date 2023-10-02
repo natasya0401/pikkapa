@@ -101,13 +101,13 @@ class HomeActivity : AppCompatActivity() {
         informations.add(InformationEntity("judul 5","ini adalah foto orang peace di pantai", "https://docs.google.com/uc?id=1KVZrjyCNZkf66WdDVBBf3brMH3ca4F51", "https://www.lipsum.com/"))
 
         binding.rvItemInformation.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        binding.rvItemInformation.adapter = InformationItemAdapter(informations, false) {
-            val myIntent = Intent(this, InformationDetailActivity::class.java)
-            myIntent.putExtra("title", it.title)
+//        binding.rvItemInformation.adapter = InformationItemAdapter(informations, false) {
+//            val myIntent = Intent(this, InformationDetailActivity::class.java)
+//            myIntent.putExtra("title", it.title)
 //            myIntent.putExtra("html", it.html)
-            myIntent.putExtra("url", it.url)
-            this.startActivity(myIntent)
-        }
+//            myIntent.putExtra("url", it.url)
+//            this.startActivity(myIntent)
+//        }
 
 
     }

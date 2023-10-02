@@ -91,7 +91,7 @@ class LocationDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap = googleMap
 
         val coordinate = LatLng(lgtd, lttd)
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinate, 30f))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinate, 17f))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(coordinate))
 
         mMap.uiSettings.isScrollGesturesEnabled = true

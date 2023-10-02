@@ -209,9 +209,6 @@ class ReminderAddActivity : AppCompatActivity() {
             var title = binding.etReminderTitle.text.toString()
             var notes = binding.etReminderNotes.text.toString()
 
-//            val myIntent = Intent(this, ReminderDetailActivity::class.java)
-//            myIntent.putExtra("title", title)
-//            myIntent.putExtra("notes", notes)
 
             if(title.isBlank() || title.isNullOrEmpty()) {
                 Toast.makeText(this, "Anda belum menuliskan judul", Toast.LENGTH_LONG).show()
