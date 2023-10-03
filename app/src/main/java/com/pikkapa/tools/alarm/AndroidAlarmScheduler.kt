@@ -54,7 +54,9 @@ class AndroidAlarmScheduler(
 //                    )
                 }
                 "SETIAP SENIN" -> {
+//                    alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.timeInMillis,pendingIntent)
                     setRepeatingWeekly(calendar, Calendar.MONDAY, pendingIntent)
+
                 }
                 "SETIAP SELASA" -> {
                     setRepeatingWeekly(calendar, Calendar.TUESDAY, pendingIntent)
@@ -100,6 +102,13 @@ class AndroidAlarmScheduler(
                     pendingIntent
                 )
             }else{
+//                alarmManager.setExact(
+//                    AlarmManager.RTC_WAKEUP,
+//                    calendar.timeInMillis,
+//                    pendingIntent
+//                )
+
+                // CHECK WITH SETEXACT !!!!
                 alarmManager.set(
                     AlarmManager.RTC_WAKEUP,
                     calendar.timeInMillis,
@@ -109,10 +118,6 @@ class AndroidAlarmScheduler(
 
 //            Toast.makeText(context, "berhasil buat alarm ${item.message} saat ${item.time}", Toast.LENGTH_SHORT)
         }
-
-
-
-
 
 
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -162,8 +167,14 @@ class AndroidAlarmScheduler(
         alarmManager.setExact(
             AlarmManager.RTC_WAKEUP,
             calendar.timeInMillis,
-//            AlarmManager.INTERVAL_DAY*7,
             pendingIntent
         )
+
+//        alarmManager.setRepeating(
+//            AlarmManager.RTC_WAKEUP,
+//            calendar.timeInMillis,
+//            AlarmManager.INTERVAL_DAY*7,
+//            pendingIntent
+//        )
     }
 }
