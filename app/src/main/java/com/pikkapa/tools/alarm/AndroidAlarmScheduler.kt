@@ -41,12 +41,17 @@ class AndroidAlarmScheduler(
             when(item.repeat) {
                 "SETIAP HARI" -> {
                     if (calendar.time.compareTo(Date()) < 0) calendar.add(Calendar.DAY_OF_MONTH, 1)
-                    alarmManager.setRepeating(
+                    alarmManager.setExact(
                         AlarmManager.RTC_WAKEUP,
                         calendar.timeInMillis,
-                        AlarmManager.INTERVAL_DAY,
                         pendingIntent
                     )
+//                    alarmManager.setRepeating(
+//                        AlarmManager.RTC_WAKEUP,
+//                        calendar.timeInMillis,
+//                        AlarmManager.INTERVAL_DAY,
+//                        pendingIntent
+//                    )
                 }
                 "SETIAP SENIN" -> {
                     setRepeatingWeekly(calendar, Calendar.MONDAY, pendingIntent)
@@ -154,10 +159,10 @@ class AndroidAlarmScheduler(
             Log.d("alarm", "alarm is set repeating every ${calendar.get(Calendar.DAY_OF_WEEK)}")
         }
 
-        alarmManager.setRepeating(
+        alarmManager.setExact(
             AlarmManager.RTC_WAKEUP,
             calendar.timeInMillis,
-            AlarmManager.INTERVAL_DAY*7,
+//            AlarmManager.INTERVAL_DAY*7,
             pendingIntent
         )
     }
