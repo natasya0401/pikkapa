@@ -164,11 +164,13 @@ class AndroidAlarmScheduler(
             Log.d("alarm", "alarm is set repeating every ${calendar.get(Calendar.DAY_OF_WEEK)}")
         }
 
-        alarmManager.setExact(
-            AlarmManager.RTC_WAKEUP,
-            calendar.timeInMillis,
-            pendingIntent
-        )
+        if (calendar.get(Calendar.DAY_OF_WEEK) == dayOfWeek) {
+            alarmManager.setExact(
+                AlarmManager.RTC_WAKEUP,
+                calendar.timeInMillis,
+                pendingIntent
+            )
+        }
 
 //        alarmManager.setRepeating(
 //            AlarmManager.RTC_WAKEUP,
