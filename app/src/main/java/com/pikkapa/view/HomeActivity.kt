@@ -139,7 +139,8 @@ class HomeActivity : AppCompatActivity() {
         }
 
         binding.btChat.setOnClickListener {
-            val url = "https://api.whatsapp.com/send?phone=+6281944864620"
+            val url = "https://api.whatsapp.com/send?phone=+62818533" +
+                    "933"
             val i = Intent(Intent.ACTION_VIEW)
             i.data = Uri.parse(url)
             startActivity(i)

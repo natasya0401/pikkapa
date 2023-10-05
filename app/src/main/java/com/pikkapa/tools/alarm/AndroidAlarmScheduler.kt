@@ -194,11 +194,11 @@ class AndroidAlarmScheduler(
     }
 
     fun setRepeatDaily(calendar: Calendar, pendingIntent: PendingIntent) {
-//        if (calendar.time.compareTo(Date()) < 0) calendar.add(Calendar.DAY_OF_MONTH, 1)
+        if (calendar.time.compareTo(Date()) < 0) calendar.add(Calendar.DAY_OF_MONTH, 1)
 
-        val currentTime = calendar.timeInMillis
+//        val currentTime = calendar.timeInMillis
 
-        val nextAlarm = calculateNextAlarm(calendar, currentTime)
+//        val nextAlarm = calculateNextAlarm(calendar, currentTime)
 
         alarmManager.setExact(
             AlarmManager.RTC_WAKEUP,
@@ -207,14 +207,14 @@ class AndroidAlarmScheduler(
         )
 
         // Calculate the time for the next day's alarm
-        calendar.timeInMillis = nextAlarm
-        calendar.add(Calendar.DAY_OF_YEAR, 1)
-
-        alarmManager.setExact(
-            AlarmManager.RTC_WAKEUP,
-            calendar.timeInMillis,
-            pendingIntent
-        )
+//        calendar.timeInMillis = nextAlarm
+//        calendar.add(Calendar.DAY_OF_YEAR, 1)
+//
+//        alarmManager.setExact(
+//            AlarmManager.RTC_WAKEUP,
+//            calendar.timeInMillis,
+//            pendingIntent
+//        )
 
     }
 
