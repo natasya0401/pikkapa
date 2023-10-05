@@ -66,8 +66,7 @@ class ReminderDetailActivity : AppCompatActivity() {
 
         binding.btReminderDelete.setOnClickListener {
             reminderAccess.delete(id)
-            val myIntent = Intent(this, ReminderActivity::class.java)
-            this.startActivity(myIntent)
+            onBackPressed()
         }
 
     }

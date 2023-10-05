@@ -89,6 +89,7 @@ class AlarmReceiver: BroadcastReceiver() {
                 return
             }
             notify(notif_id, builder.build())
+
         }
     }
 
