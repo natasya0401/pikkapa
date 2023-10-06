@@ -43,7 +43,6 @@ class AndroidAlarmScheduler(
         if(repeat) {
             when(item.repeat) {
                 "SETIAP HARI" -> {
-
                     setRepeatDaily(calendar, pendingIntent)
 
 //                    if (calendar.time.compareTo(Date()) < 0) calendar.add(Calendar.DAY_OF_MONTH, 1)
@@ -194,11 +193,8 @@ class AndroidAlarmScheduler(
     }
 
     fun setRepeatDaily(calendar: Calendar, pendingIntent: PendingIntent) {
+
         if (calendar.time.compareTo(Date()) < 0) calendar.add(Calendar.DAY_OF_MONTH, 1)
-
-//        val currentTime = calendar.timeInMillis
-
-//        val nextAlarm = calculateNextAlarm(calendar, currentTime)
 
         alarmManager.setExact(
             AlarmManager.RTC_WAKEUP,
@@ -206,36 +202,10 @@ class AndroidAlarmScheduler(
             pendingIntent
         )
 
-        // Calculate the time for the next day's alarm
-//        calendar.timeInMillis = nextAlarm
-//        calendar.add(Calendar.DAY_OF_YEAR, 1)
-//
-//        alarmManager.setExact(
-//            AlarmManager.RTC_WAKEUP,
-//            calendar.timeInMillis,
-//            pendingIntent
-//        )
+        calendar.add(Calendar.DAY_OF_MONTH, 1)
 
-    }
+        setRepeatDaily(calendar, pendingIntent)
 
-    fun calculateNextAlarm(calendar: Calendar, currentTime: Long): Long {
-
-        val hourOfDay = calendar.get(Calendar.HOUR_OF_DAY)
-        val minute = calendar.get(Calendar.MINUTE)
-
-        // Calculate the next alarm time
-        val nextAlarmTime = Calendar.getInstance()
-        nextAlarmTime.timeInMillis = currentTime
-        nextAlarmTime.set(Calendar.HOUR_OF_DAY, hourOfDay)
-        nextAlarmTime.set(Calendar.MINUTE, minute)
-        nextAlarmTime.set(Calendar.SECOND, 0)
-        nextAlarmTime.set(Calendar.MILLISECOND, 0)
-
-        if (nextAlarmTime.timeInMillis <= currentTime) {
-            calendar.add(Calendar.DAY_OF_YEAR, 1)
-        }
-
-        return nextAlarmTime.timeInMillis
     }
 
 }

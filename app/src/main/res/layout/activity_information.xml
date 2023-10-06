@@ -76,7 +76,7 @@
             tools:layout_editor_absoluteY="-147dp"
             tools:listitem="@layout/item_information"
             app:layout_constraintTop_toBottomOf="@+id/layout_searchbar"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toTopOf="@id/footer"/>
 
         <include
             android:id="@+id/footer"
