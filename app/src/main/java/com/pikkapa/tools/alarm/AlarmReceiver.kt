@@ -1,6 +1,7 @@
 package com.pikkapa.tools.alarm
 
 import android.Manifest
+import android.app.AlarmManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -9,11 +10,14 @@ import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.icu.util.Calendar
 import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.graphics.scaleMatrix
 import com.pikkapa.R
 import com.pikkapa.data.access.ReminderAccess
 import com.pikkapa.view.ReminderActivity
@@ -21,7 +25,6 @@ import com.pikkapa.view.ReminderActivity
 class AlarmReceiver: BroadcastReceiver() {
 
     lateinit var context : Context
-
     override fun onReceive(context: Context?, intent: Intent?) {
         Log.d("alarm", "alarm triggered 1")
         if(context!=null) {
@@ -35,6 +38,12 @@ class AlarmReceiver: BroadcastReceiver() {
             reminderAccess.delete(id.toInt())
             println("Alarm triggered: $message")
             Log.d("alarm", "alarm triggered $message")
+
+            // Calculate the time for the next alarm occurrence (e.g., 24 hours from now)
+            val nextAlarmTimeMillis = System.currentTimeMillis() + (24 * 60 * 60 * 1000) // 24 hours in milliseconds
+
+            // Schedule the next alarm using setExact
+            scheduleNextAlarm(context, nextAlarmTimeMillis)
         }
     }
 
@@ -99,5 +108,25 @@ class AlarmReceiver: BroadcastReceiver() {
         sp.edit().putInt("notification_id_key", (id + 1) % Int.MAX_VALUE).apply()
 
         return id
+    }
+
+    fun scheduleNextAlarm(context: Context?, triggerTimeMillis: Long) {
+        if (context != null) {
+            val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            val intent = Intent(context, AlarmReceiver::class.java)
+            val pendingIntent = PendingIntent.getBroadcast(
+                context,
+                0,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
+
+            // Schedule the next alarm using setExact
+            alarmManager.setExact(
+                AlarmManager.RTC_WAKEUP,
+                triggerTimeMillis,
+                pendingIntent
+            )
+        }
     }
 }

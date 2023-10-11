@@ -22,13 +22,17 @@ class AndroidAlarmScheduler(
     private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
     override fun schedule(item: AlarmItem, repeat:Boolean) {
+
+        var times = item.time.split(":")
         val intent = Intent(context, AlarmReceiver::class.java).apply {
             putExtra("title", item.title)
             putExtra("message", item.message)
             putExtra("alarmId", item.id.toString())
+//            putExtra("hour", times[0])
+//            putExtra("minute", times[1])
+//            putExtra("sec", "0")
         }
 
-        var times = item.time.split(":")
         var calendar = Calendar.getInstance()
         calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(times[0]))
         calendar.set(Calendar.MINUTE, Integer.parseInt(times[1]))
@@ -43,6 +47,7 @@ class AndroidAlarmScheduler(
         if(repeat) {
             when(item.repeat) {
                 "SETIAP HARI" -> {
+//                    intent.putExtra("repeat", "1")
                     setRepeatDaily(calendar, pendingIntent)
 
 //                    if (calendar.time.compareTo(Date()) < 0) calendar.add(Calendar.DAY_OF_MONTH, 1)
@@ -201,11 +206,5 @@ class AndroidAlarmScheduler(
             calendar.timeInMillis,
             pendingIntent
         )
-
-        calendar.add(Calendar.DAY_OF_MONTH, 1)
-
-        setRepeatDaily(calendar, pendingIntent)
-
     }
-
 }
