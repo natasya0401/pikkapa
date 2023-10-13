@@ -33,6 +33,7 @@
 
         <receiver
             android:name=".tools.alarm.AlarmReceiver"
+            android:enabled="true"
             android:exported="true" />
 
         <activity

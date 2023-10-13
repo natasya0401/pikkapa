@@ -10,6 +10,7 @@ import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.icu.util.Calendar
+import android.icu.util.TimeUnit
 import android.os.Build
 import android.util.Log
 import android.widget.Toast
@@ -34,14 +35,23 @@ class AlarmReceiver: BroadcastReceiver() {
             val message = intent?.getStringExtra("message") ?: return
             val id = intent?.getStringExtra("alarmId") ?: return
 
+            val repeat = intent?.getIntExtra("r", 0)
+
+
+            Toast.makeText(context, "repeat : $repeat", Toast.LENGTH_SHORT).show()
 
             createNotificationChanel("reminder")
-            sendNotification(title, "reminder", id.toInt(), message, intent)
+            if (repeat != null) {
+                sendNotification(title, "reminder", id.toInt(), message, repeat)
+            }
             println("Alarm triggered: $message")
             Log.d("alarm", "alarm triggered $message")
 
-            val reminderAccess = ReminderAccess(this.context)
-            reminderAccess.delete(id.toInt())
+            if (repeat == 0) {
+                val reminderAccess = ReminderAccess(this.context)
+                reminderAccess.delete(id.toInt())
+            }
+
 
 
         }
@@ -62,7 +72,7 @@ class AlarmReceiver: BroadcastReceiver() {
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
-    private fun sendNotification(title:String, chanel_id:String, notif_id:Int, notes:String, intent: Intent){
+    private fun sendNotification(title:String, chanel_id:String, notif_id:Int, notes:String, repeat : Int){
         val intent = Intent(context, ReminderActivity::class.java)
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         val pendingIntent : PendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -98,7 +108,14 @@ class AlarmReceiver: BroadcastReceiver() {
                 // for ActivityCompat#requestPermissions for more details.
                 return
             }
-            notify(notif_id, builder.build())
+            if (repeat == 0) {
+                notify(notif_id, builder.build())
+            } else if (repeat == 1) {
+                setRepeatingDaily(AndroidAlarmScheduler(context), pendingIntent)
+                notify(notif_id, builder.build())
+            }
+
+
         }
     }
 
@@ -111,15 +128,15 @@ class AlarmReceiver: BroadcastReceiver() {
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
-    fun setRepeatingDaily(androidAlarmScheduler: AndroidAlarmScheduler) {
+    fun setRepeatingDaily(androidAlarmScheduler: AndroidAlarmScheduler, pendingIntent: PendingIntent) {
 
-        val calendar = Calendar.getInstance()
-
-        calendar.add(Calendar.DAY_OF_YEAR, 1)
+        val calendar = Calendar.getInstance().apply {
+            this.timeInMillis = timeInMillis + (24 * 60 * 60 * 1000)
+        }
 
         val time = calendar.timeInMillis
 
-        androidAlarmScheduler.setRepeatDaily(time)
+        androidAlarmScheduler.setRepeatDaily(time, pendingIntent)
 
     }
 }
