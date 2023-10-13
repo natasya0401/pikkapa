@@ -1,6 +1,7 @@
 package com.pikkapa.tools.alarm
 
 import android.Manifest
+import android.app.AlarmManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -37,23 +38,30 @@ class AlarmReceiver: BroadcastReceiver() {
 
             val repeat = intent?.getIntExtra("r", 0)
 
+            val pendingIntent : PendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE)
+            } else{
+                PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+            }
 
             Toast.makeText(context, "repeat : $repeat", Toast.LENGTH_SHORT).show()
 
-            createNotificationChanel("reminder")
-            if (repeat != null) {
-                sendNotification(title, "reminder", id.toInt(), message, repeat)
-            }
-            println("Alarm triggered: $message")
-            Log.d("alarm", "alarm triggered $message")
-
             if (repeat == 0) {
+                createNotificationChanel("reminder")
+                sendNotification(title, "reminder", id.toInt(), message)
+
                 val reminderAccess = ReminderAccess(this.context)
                 reminderAccess.delete(id.toInt())
+            } else if (repeat == 1) {
+                setRepeatingDaily(AndroidAlarmScheduler(context), pendingIntent)
+                createNotificationChanel("reminder")
+                sendNotification(title, "reminder", id.toInt(), message)
             }
 
 
 
+            println("Alarm triggered: $message")
+            Log.d("alarm", "alarm triggered $message")
         }
     }
 
@@ -72,7 +80,7 @@ class AlarmReceiver: BroadcastReceiver() {
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
-    private fun sendNotification(title:String, chanel_id:String, notif_id:Int, notes:String, repeat : Int){
+    private fun sendNotification(title:String, chanel_id:String, notif_id:Int, notes:String){
         val intent = Intent(context, ReminderActivity::class.java)
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         val pendingIntent : PendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -108,14 +116,13 @@ class AlarmReceiver: BroadcastReceiver() {
                 // for ActivityCompat#requestPermissions for more details.
                 return
             }
-            if (repeat == 0) {
-                notify(notif_id, builder.build())
-            } else if (repeat == 1) {
-                setRepeatingDaily(AndroidAlarmScheduler(context), pendingIntent)
-                notify(notif_id, builder.build())
-            }
-
-
+            notify(notif_id, builder.build())
+//            if (repeat == 0) {
+//                notify(notif_id, builder.build())
+//            } else if (repeat == 1) {
+//                setRepeatingDaily(AndroidAlarmScheduler(context), pendingIntent)
+//                notify(notif_id, builder.build())
+//            }
         }
     }
 

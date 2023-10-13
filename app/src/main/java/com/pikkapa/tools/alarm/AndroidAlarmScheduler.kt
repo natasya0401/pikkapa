@@ -44,7 +44,7 @@ class AndroidAlarmScheduler(
                 "SETIAP HARI" -> {
 
 
-                    if (calendar.time.compareTo(Date()) < 0) calendar.add(Calendar.DAY_OF_MONTH, 1)
+//                    if (calendar.time.compareTo(Date()) < 0) calendar.add(Calendar.DAY_OF_MONTH, 1)
 
                     val timeInMillis = calendar.timeInMillis
 
@@ -53,6 +53,7 @@ class AndroidAlarmScheduler(
                         putExtra("message", item.message)
                         putExtra("alarmId", item.id.toString())
                         putExtra("r", 1)
+                        putExtra("firingTime", timeInMillis)
                     }))
 
 //                    alarmManager.setRepeating(
@@ -138,7 +139,7 @@ class AndroidAlarmScheduler(
         )
     }
 
-    private fun setAlarm(timeInMillis: Long, pendingIntent: PendingIntent) {
+    fun setAlarm(timeInMillis: Long, pendingIntent: PendingIntent) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             alarmManager.setExactAndAllowWhileIdle(
                 AlarmManager.RTC_WAKEUP,
@@ -182,18 +183,6 @@ class AndroidAlarmScheduler(
         }
 
         setAlarm(calendar.timeInMillis, pendingIntent)
-
-//        do {
-//
-//        alarmManager.setExact(
-//            AlarmManager.RTC_WAKEUP,
-//            calendar.timeInMillis,
-//            pendingIntent
-//        )
-//
-//            calendar.add(Calendar.DAY_OF_MONTH, 7)
-//
-//        } while(true)
 
 //        alarmManager.setRepeating(
 //            AlarmManager.RTC_WAKEUP,
