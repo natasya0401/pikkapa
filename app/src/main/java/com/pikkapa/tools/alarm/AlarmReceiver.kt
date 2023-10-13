@@ -1,7 +1,6 @@
 package com.pikkapa.tools.alarm
 
 import android.Manifest
-import android.app.AlarmManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -13,18 +12,20 @@ import android.content.pm.PackageManager
 import android.icu.util.Calendar
 import android.os.Build
 import android.util.Log
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.graphics.scaleMatrix
 import com.pikkapa.R
 import com.pikkapa.data.access.ReminderAccess
 import com.pikkapa.view.ReminderActivity
+import kotlin.concurrent.timer
 
 class AlarmReceiver: BroadcastReceiver() {
 
     lateinit var context : Context
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onReceive(context: Context?, intent: Intent?) {
         Log.d("alarm", "alarm triggered 1")
         if(context!=null) {
@@ -32,18 +33,17 @@ class AlarmReceiver: BroadcastReceiver() {
             val title = intent?.getStringExtra("title") ?: return
             val message = intent?.getStringExtra("message") ?: return
             val id = intent?.getStringExtra("alarmId") ?: return
+
+
             createNotificationChanel("reminder")
-            sendNotification(title, "reminder", id.toInt(), message)
-            val reminderAccess = ReminderAccess(this.context)
-            reminderAccess.delete(id.toInt())
+            sendNotification(title, "reminder", id.toInt(), message, intent)
             println("Alarm triggered: $message")
             Log.d("alarm", "alarm triggered $message")
 
-            // Calculate the time for the next alarm occurrence (e.g., 24 hours from now)
-            val nextAlarmTimeMillis = System.currentTimeMillis() + (24 * 60 * 60 * 1000) // 24 hours in milliseconds
+            val reminderAccess = ReminderAccess(this.context)
+            reminderAccess.delete(id.toInt())
 
-            // Schedule the next alarm using setExact
-            scheduleNextAlarm(context, nextAlarmTimeMillis)
+
         }
     }
 
@@ -61,7 +61,8 @@ class AlarmReceiver: BroadcastReceiver() {
         }
     }
 
-    private fun sendNotification(title:String, chanel_id:String, notif_id:Int, notes:String){
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun sendNotification(title:String, chanel_id:String, notif_id:Int, notes:String, intent: Intent){
         val intent = Intent(context, ReminderActivity::class.java)
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         val pendingIntent : PendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -98,7 +99,6 @@ class AlarmReceiver: BroadcastReceiver() {
                 return
             }
             notify(notif_id, builder.build())
-
         }
     }
 
@@ -110,29 +110,16 @@ class AlarmReceiver: BroadcastReceiver() {
         return id
     }
 
-    fun scheduleNextAlarm(context: Context?, triggerTimeMillis: Long) {
-        if (context != null) {
-            val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-            val intent = Intent(context, AlarmReceiver::class.java)
-//            val pendingIntent = PendingIntent.getBroadcast(
-//                context,
-//                0,
-//                intent,
-//                PendingIntent.FLAG_UPDATE_CURRENT
-//            )
+    @RequiresApi(Build.VERSION_CODES.N)
+    fun setRepeatingDaily(androidAlarmScheduler: AndroidAlarmScheduler) {
 
-            val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                PendingIntent.getBroadcast(context, context.hashCode(), intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE)
-            } else{
-                PendingIntent.getBroadcast(context, context.hashCode(), intent, PendingIntent.FLAG_UPDATE_CURRENT)
-            }
+        val calendar = Calendar.getInstance()
 
-            // Schedule the next alarm using setExact
-            alarmManager.setExact(
-                AlarmManager.RTC_WAKEUP,
-                triggerTimeMillis,
-                pendingIntent
-            )
-        }
+        calendar.add(Calendar.DAY_OF_YEAR, 1)
+
+        val time = calendar.timeInMillis
+
+        androidAlarmScheduler.setRepeatDaily(time)
+
     }
 }

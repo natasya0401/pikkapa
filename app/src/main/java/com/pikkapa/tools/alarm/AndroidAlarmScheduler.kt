@@ -7,57 +7,45 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import android.provider.CalendarContract.CalendarAlerts
 import android.util.Log
-import java.text.SimpleDateFormat
-import java.time.temporal.TemporalAdjuster
 import java.util.*
-import kotlin.time.Duration
-import kotlin.time.Duration.Companion.hours
 
 class AndroidAlarmScheduler(
     private val context: Context
 ): AlarmScheduler {
-
     private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-
+    private var itemId : Int = 0
     override fun schedule(item: AlarmItem, repeat:Boolean) {
 
-        var times = item.time.split(":")
-        val intent = Intent(context, AlarmReceiver::class.java).apply {
-            putExtra("title", item.title)
-            putExtra("message", item.message)
-            putExtra("alarmId", item.id.toString())
-//            putExtra("hour", times[0])
-//            putExtra("minute", times[1])
-//            putExtra("sec", "0")
-        }
+//        val intent = getIntent().apply {
+//            putExtra("title",item.title)
+//            putExtra("message", item.message)
+//            putExtra("alarmId", item.id.toString())
+//        }
 
+
+//        val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+//            PendingIntent.getBroadcast(context, itemId, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE)
+//        } else{
+//            PendingIntent.getBroadcast(context, itemId, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+//        }
+
+        var times = item.time.split(":")
         var calendar = Calendar.getInstance()
         calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(times[0]))
         calendar.set(Calendar.MINUTE, Integer.parseInt(times[1]))
         calendar.set(Calendar.SECOND, 0)
 
-        val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            PendingIntent.getBroadcast(context, item.id, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE)
-        } else{
-            PendingIntent.getBroadcast(context, item.id, intent, PendingIntent.FLAG_UPDATE_CURRENT)
-        }
-
         if(repeat) {
             when(item.repeat) {
                 "SETIAP HARI" -> {
-//                    intent.putExtra("repeat", "1")
-                    setRepeatDaily(calendar, pendingIntent)
 
-//                    if (calendar.time.compareTo(Date()) < 0) calendar.add(Calendar.DAY_OF_MONTH, 1)
-//
-//                    alarmManager.setExact(
-//                        AlarmManager.RTC_WAKEUP,
-//                        calendar.timeInMillis,
-//                        pendingIntent
-//                    )
 
+                    if (calendar.time.compareTo(Date()) < 0) calendar.add(Calendar.DAY_OF_MONTH, 1)
+
+                    val timeInMillis = calendar.timeInMillis
+
+                    setRepeatDaily(timeInMillis)
 
 //                    alarmManager.setRepeating(
 //                        AlarmManager.RTC_WAKEUP,
@@ -68,26 +56,26 @@ class AndroidAlarmScheduler(
                 }
                 "SETIAP SENIN" -> {
 //                    alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.timeInMillis,pendingIntent)
-                    setRepeatingWeekly(calendar, Calendar.MONDAY, pendingIntent)
+                    setRepeatingWeekly(calendar, Calendar.MONDAY, getPendingIntent(getIntent()))
 
                 }
                 "SETIAP SELASA" -> {
-                    setRepeatingWeekly(calendar, Calendar.TUESDAY, pendingIntent)
+                    setRepeatingWeekly(calendar, Calendar.TUESDAY, getPendingIntent(getIntent()))
                 }
                 "SETIAP RABU" -> {
-                    setRepeatingWeekly(calendar, Calendar.WEDNESDAY, pendingIntent)
+                    setRepeatingWeekly(calendar, Calendar.WEDNESDAY, getPendingIntent(getIntent()))
                 }
                 "SETIAP KAMIS" -> {
-                    setRepeatingWeekly(calendar, Calendar.THURSDAY, pendingIntent)
+                    setRepeatingWeekly(calendar, Calendar.THURSDAY, getPendingIntent(getIntent()))
                 }
                 "SETIAP JUMAT" -> {
-                    setRepeatingWeekly(calendar, Calendar.FRIDAY, pendingIntent)
+                    setRepeatingWeekly(calendar, Calendar.FRIDAY, getPendingIntent(getIntent()))
                 }
                 "SETIAP SABTU" -> {
-                    setRepeatingWeekly(calendar, Calendar.SATURDAY, pendingIntent)
+                    setRepeatingWeekly(calendar, Calendar.SATURDAY, getPendingIntent(getIntent()))
                 }
                 "SETIAP MINGGU" -> {
-                    setRepeatingWeekly(calendar, Calendar.SUNDAY, pendingIntent)
+                    setRepeatingWeekly(calendar, Calendar.SUNDAY, getPendingIntent(getIntent()))
                 }
             }
 
@@ -107,27 +95,7 @@ class AndroidAlarmScheduler(
             Log.d("alarm", "today is : ${Calendar.getInstance().get(Calendar.DAY_OF_MONTH)}-${Calendar.getInstance().get(Calendar.MONTH)}-${Calendar.getInstance().get(Calendar.YEAR)} ${Calendar.getInstance().get(Calendar.HOUR_OF_DAY)}:${Calendar.getInstance().get(Calendar.MINUTE)}:${Calendar.getInstance().get(Calendar.SECOND)}")
             Log.d("alarm", "alarm set on : ${calendar.get(Calendar.DAY_OF_MONTH)}-${calendar.get(Calendar.MONTH)}-${calendar.get(Calendar.YEAR)} ${calendar.get(Calendar.HOUR_OF_DAY)}:${calendar.get(Calendar.MINUTE)}:${calendar.get(Calendar.SECOND)}")
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                alarmManager.setExactAndAllowWhileIdle(
-                    AlarmManager.RTC_WAKEUP,
-//                    Calendar.getInstance().timeInMillis + 5000,
-                    calendar.timeInMillis,
-                    pendingIntent
-                )
-            }else{
-//                alarmManager.setExact(
-//                    AlarmManager.RTC_WAKEUP,
-//                    calendar.timeInMillis,
-//                    pendingIntent
-//                )
-
-                // CHECK WITH SETEXACT !!!!
-                alarmManager.set(
-                    AlarmManager.RTC_WAKEUP,
-                    calendar.timeInMillis,
-                    pendingIntent
-                )
-            }
+            setAlarm(calendar.timeInMillis, getPendingIntent(getIntent()))
 
 //            Toast.makeText(context, "berhasil buat alarm ${item.message} saat ${item.time}", Toast.LENGTH_SHORT)
         }
@@ -158,7 +126,31 @@ class AndroidAlarmScheduler(
         )
     }
 
-    fun setRepeatingWeekly(calendar:Calendar, dayOfWeek:Int, pendingIntent:PendingIntent) {
+    private fun setAlarm(timeInMillis: Long, pendingIntent: PendingIntent) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            alarmManager.setExactAndAllowWhileIdle(
+                AlarmManager.RTC_WAKEUP,
+//                    Calendar.getInstance().timeInMillis + 5000,
+                timeInMillis,
+                pendingIntent
+            )
+        }else{
+//                alarmManager.setExact(
+//                    AlarmManager.RTC_WAKEUP,
+//                    timeInMillis,
+//                    pendingIntent
+//                )
+
+            // CHECK WITH SETEXACT !!!!
+            alarmManager.set(
+                AlarmManager.RTC_WAKEUP,
+                timeInMillis,
+                pendingIntent
+            )
+        }
+    }
+
+    fun setRepeatingWeekly(calendar:Calendar, dayOfWeek:Int, pendingIntent: PendingIntent) {
         if(calendar.get(Calendar.DAY_OF_WEEK) == dayOfWeek) {
             if (calendar.time.compareTo(Date()) < 0) {
                 //di hari yang sama tapi jamnya sudah lewat
@@ -177,13 +169,15 @@ class AndroidAlarmScheduler(
             Log.d("alarm", "alarm is set repeating every ${calendar.get(Calendar.DAY_OF_WEEK)}")
         }
 
+        setAlarm(calendar.timeInMillis, pendingIntent)
+
 //        do {
 //
-        alarmManager.setExact(
-            AlarmManager.RTC_WAKEUP,
-            calendar.timeInMillis,
-            pendingIntent
-        )
+//        alarmManager.setExact(
+//            AlarmManager.RTC_WAKEUP,
+//            calendar.timeInMillis,
+//            pendingIntent
+//        )
 //
 //            calendar.add(Calendar.DAY_OF_MONTH, 7)
 //
@@ -197,14 +191,21 @@ class AndroidAlarmScheduler(
 //        )
     }
 
-    fun setRepeatDaily(calendar: Calendar, pendingIntent: PendingIntent) {
+    fun setRepeatDaily(timeInMillis: Long) {
 
-        if (calendar.time.compareTo(Date()) < 0) calendar.add(Calendar.DAY_OF_MONTH, 1)
-
-        alarmManager.setExact(
-            AlarmManager.RTC_WAKEUP,
-            calendar.timeInMillis,
-            pendingIntent
-        )
+        setAlarm(timeInMillis, getPendingIntent(getIntent()))
     }
+
+    private fun getIntent() = Intent(context, AlarmReceiver::class.java)
+
+    private fun getPendingIntent(intent: Intent) : PendingIntent{
+        val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PendingIntent.getBroadcast(context, itemId, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE)
+        } else{
+            PendingIntent.getBroadcast(context, itemId, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        }
+
+        return pendingIntent
+    }
+
 }
