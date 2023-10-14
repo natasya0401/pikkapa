@@ -39,13 +39,14 @@ class AndroidAlarmScheduler(
         calendar.set(Calendar.MINUTE, Integer.parseInt(times[1]))
         calendar.set(Calendar.SECOND, 0)
 
+        val timeInMillis = calendar.timeInMillis
+
         if(repeat) {
             when(item.repeat) {
                 "SETIAP HARI" -> {
 
                     if (calendar.time.compareTo(Date()) < 0) calendar.add(Calendar.DAY_OF_MONTH, 1)
 
-                    val timeInMillis = calendar.timeInMillis
 
                     setRepeatDaily(timeInMillis, getPendingIntent(getIntent().apply {
                         putExtra("title",item.title)
@@ -65,7 +66,10 @@ class AndroidAlarmScheduler(
                 }
                 "SETIAP SENIN" -> {
 //                    alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.timeInMillis,pendingIntent)
-                    setRepeatWeekly(calendar, Calendar.MONDAY, getPendingIntent(getIntent().apply {
+
+                    val cal = checkDayOfWeek(calendar, Calendar.MONDAY)
+
+                    setRepeatWeekly(cal.timeInMillis, getPendingIntent(getIntent().apply {
                         putExtra("title",item.title)
                         putExtra("message", item.message)
                         putExtra("alarmId", item.id.toString())
@@ -76,7 +80,8 @@ class AndroidAlarmScheduler(
 
                 }
                 "SETIAP SELASA" -> {
-                    setRepeatWeekly(calendar, Calendar.TUESDAY, getPendingIntent(getIntent().apply {
+                    val cal = checkDayOfWeek(calendar, Calendar.TUESDAY)
+                    setRepeatWeekly(cal.timeInMillis, getPendingIntent(getIntent().apply {
                         putExtra("title",item.title)
                         putExtra("message", item.message)
                         putExtra("alarmId", item.id.toString())
@@ -86,7 +91,8 @@ class AndroidAlarmScheduler(
                     }))
                 }
                 "SETIAP RABU" -> {
-                    setRepeatWeekly(calendar, Calendar.WEDNESDAY, getPendingIntent(getIntent().apply {
+                    val cal = checkDayOfWeek(calendar, Calendar.WEDNESDAY)
+                    setRepeatWeekly(cal.timeInMillis, getPendingIntent(getIntent().apply {
                         putExtra("title",item.title)
                         putExtra("message", item.message)
                         putExtra("alarmId", item.id.toString())
@@ -96,7 +102,8 @@ class AndroidAlarmScheduler(
                     }))
                 }
                 "SETIAP KAMIS" -> {
-                    setRepeatWeekly(calendar, Calendar.THURSDAY, getPendingIntent(getIntent().apply {
+                    val cal = checkDayOfWeek(calendar, Calendar.THURSDAY)
+                    setRepeatWeekly(cal.timeInMillis, getPendingIntent(getIntent().apply {
                         putExtra("title",item.title)
                         putExtra("message", item.message)
                         putExtra("alarmId", item.id.toString())
@@ -106,7 +113,8 @@ class AndroidAlarmScheduler(
                     }))
                 }
                 "SETIAP JUMAT" -> {
-                    setRepeatWeekly(calendar, Calendar.FRIDAY, getPendingIntent(getIntent().apply {
+                    val cal = checkDayOfWeek(calendar, Calendar.FRIDAY)
+                    setRepeatWeekly(cal.timeInMillis, getPendingIntent(getIntent().apply {
                         putExtra("title",item.title)
                         putExtra("message", item.message)
                         putExtra("alarmId", item.id.toString())
@@ -116,7 +124,8 @@ class AndroidAlarmScheduler(
                     }))
                 }
                 "SETIAP SABTU" -> {
-                    setRepeatWeekly(calendar, Calendar.SATURDAY, getPendingIntent(getIntent().apply {
+                    val cal = checkDayOfWeek(calendar, Calendar.SATURDAY)
+                    setRepeatWeekly(cal.timeInMillis, getPendingIntent(getIntent().apply {
                         putExtra("title",item.title)
                         putExtra("message", item.message)
                         putExtra("alarmId", item.id.toString())
@@ -126,7 +135,8 @@ class AndroidAlarmScheduler(
                     }))
                 }
                 "SETIAP MINGGU" -> {
-                    setRepeatWeekly(calendar, Calendar.SUNDAY, getPendingIntent(getIntent().apply {
+                    val cal = checkDayOfWeek(calendar, Calendar.SUNDAY)
+                    setRepeatWeekly(cal.timeInMillis, getPendingIntent(getIntent().apply {
                         putExtra("title",item.title)
                         putExtra("message", item.message)
                         putExtra("alarmId", item.id.toString())
@@ -153,7 +163,7 @@ class AndroidAlarmScheduler(
             Log.d("alarm", "today is : ${Calendar.getInstance().get(Calendar.DAY_OF_MONTH)}-${Calendar.getInstance().get(Calendar.MONTH)}-${Calendar.getInstance().get(Calendar.YEAR)} ${Calendar.getInstance().get(Calendar.HOUR_OF_DAY)}:${Calendar.getInstance().get(Calendar.MINUTE)}:${Calendar.getInstance().get(Calendar.SECOND)}")
             Log.d("alarm", "alarm set on : ${calendar.get(Calendar.DAY_OF_MONTH)}-${calendar.get(Calendar.MONTH)}-${calendar.get(Calendar.YEAR)} ${calendar.get(Calendar.HOUR_OF_DAY)}:${calendar.get(Calendar.MINUTE)}:${calendar.get(Calendar.SECOND)}")
 
-            setAlarm(calendar.timeInMillis, getPendingIntent(getIntent().apply {
+            setAlarm(timeInMillis, getPendingIntent(getIntent().apply {
                 putExtra("title",item.title)
                 putExtra("message", item.message)
                 putExtra("alarmId", item.id.toString())
@@ -215,7 +225,8 @@ class AndroidAlarmScheduler(
         }
     }
 
-    fun setRepeatWeekly(calendar:Calendar, dayOfWeek:Int, pendingIntent: PendingIntent) {
+
+    private fun checkDayOfWeek(calendar: Calendar, dayOfWeek: Int) : Calendar{
         if(calendar.get(Calendar.DAY_OF_WEEK) == dayOfWeek) {
             if (calendar.time.compareTo(Date()) < 0) {
                 //di hari yang sama tapi jamnya sudah lewat
@@ -233,8 +244,28 @@ class AndroidAlarmScheduler(
 
             Log.d("alarm", "alarm is set repeating every ${calendar.get(Calendar.DAY_OF_WEEK)}")
         }
+        return calendar
+    }
+    fun setRepeatWeekly(timeInMillis: Long, pendingIntent: PendingIntent) {
+//        if(calendar.get(Calendar.DAY_OF_WEEK) == dayOfWeek) {
+//            if (calendar.time.compareTo(Date()) < 0) {
+//                //di hari yang sama tapi jamnya sudah lewat
+//                calendar.add(Calendar.WEEK_OF_MONTH, 1)
+//            } else {
+//                //di hari yang sama tapi jamnya belum lewat
+//
+//            }
+//            Log.d("alarm", "alarm is set repeating every ${calendar.get(Calendar.DAY_OF_WEEK)}")
+//        } else {
+//            //di hari yang beda
+//            while(calendar.get(Calendar.DAY_OF_WEEK) != dayOfWeek) {
+//                calendar.add(Calendar.DAY_OF_MONTH, 1)
+//            }
+//
+//            Log.d("alarm", "alarm is set repeating every ${calendar.get(Calendar.DAY_OF_WEEK)}")
+//        }
 
-        setAlarm(calendar.timeInMillis, pendingIntent)
+        setAlarm(timeInMillis, pendingIntent)
 
 //        alarmManager.setRepeating(
 //            AlarmManager.RTC_WAKEUP,

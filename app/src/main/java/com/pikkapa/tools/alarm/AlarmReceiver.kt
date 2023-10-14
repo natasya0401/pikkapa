@@ -53,6 +53,7 @@ class AlarmReceiver: BroadcastReceiver() {
             hour = intent?.getStringExtra("hour") ?: return
             minute = intent?.getStringExtra("minute") ?: return
 
+            Toast.makeText(context, "repeat : $repeat", Toast.LENGTH_SHORT).show()
 
             Toast.makeText(context, "this : $hour : $minute", Toast.LENGTH_SHORT).show()
 
@@ -69,6 +70,14 @@ class AlarmReceiver: BroadcastReceiver() {
                 sendNotification(title, "reminder", id.toInt(), message)
 
                 setRepeatingDaily(AndroidAlarmScheduler(context), hour, minute)
+
+                Toast.makeText(context, "set : $hour : $minute", Toast.LENGTH_SHORT).show()
+            } else if (repeat == "2") {
+
+                createNotificationChanel("reminder")
+                sendNotification(title, "reminder", id.toInt(), message)
+
+                setRepeatingWeekly(AndroidAlarmScheduler(context), hour, minute)
 
                 Toast.makeText(context, "set : $hour : $minute", Toast.LENGTH_SHORT).show()
             }
@@ -177,7 +186,7 @@ class AlarmReceiver: BroadcastReceiver() {
     @RequiresApi(Build.VERSION_CODES.N)
     fun setRepeatingWeekly(androidAlarmScheduler: AndroidAlarmScheduler, hour : String, minute : String) {
         val calendar = Calendar.getInstance()
-        calendar.add(Calendar.DAY_OF_MONTH, 1)
+        calendar.add(Calendar.DAY_OF_MONTH, 7)
 
         calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hour))
         calendar.set(Calendar.MINUTE, Integer.parseInt(minute))
@@ -189,13 +198,13 @@ class AlarmReceiver: BroadcastReceiver() {
             putExtra("title",title)
             putExtra("message", message)
             putExtra("alarmId", id.toString())
-            putExtra("r", "1")
+            putExtra("r", "2")
             putExtra("hour", hour)
             putExtra("minute", minute)
         }
         val pendingIntent = androidAlarmScheduler.getPendingIntent(intent)
 
-        androidAlarmScheduler.setRepeatDaily(time, pendingIntent)
+        androidAlarmScheduler.setRepeatWeekly(time, pendingIntent)
 
     }
 }
