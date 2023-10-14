@@ -17,6 +17,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
+import androidx.core.app.AppLaunchChecker
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.pikkapa.R
@@ -36,7 +37,7 @@ class AlarmReceiver: BroadcastReceiver() {
             val message = intent?.getStringExtra("message") ?: return
             val id = intent?.getStringExtra("alarmId") ?: return
 
-            val repeat = intent?.getIntExtra("r", 0)
+            val repeat = intent?.getStringExtra("r") ?: return
 
             val pendingIntent : PendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE)
@@ -46,15 +47,16 @@ class AlarmReceiver: BroadcastReceiver() {
 
             Toast.makeText(context, "repeat : $repeat", Toast.LENGTH_SHORT).show()
 
-            if (repeat == 0) {
+            if (repeat == "0") {
                 createNotificationChanel("reminder")
                 sendNotification(title, "reminder", id.toInt(), message)
 
                 val reminderAccess = ReminderAccess(this.context)
                 reminderAccess.delete(id.toInt())
-            } else if (repeat == 1) {
-                setRepeatingDaily(AndroidAlarmScheduler(context), pendingIntent)
+
+            } else if (repeat == "1") {
                 createNotificationChanel("reminder")
+                setRepeatingDaily(AndroidAlarmScheduler(context), pendingIntent)
                 sendNotification(title, "reminder", id.toInt(), message)
             }
 
@@ -136,7 +138,6 @@ class AlarmReceiver: BroadcastReceiver() {
 
     @RequiresApi(Build.VERSION_CODES.N)
     fun setRepeatingDaily(androidAlarmScheduler: AndroidAlarmScheduler, pendingIntent: PendingIntent) {
-
         val calendar = Calendar.getInstance().apply {
             this.timeInMillis = timeInMillis + (24 * 60 * 60 * 1000)
         }

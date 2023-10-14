@@ -52,8 +52,7 @@ class AndroidAlarmScheduler(
                         putExtra("title",item.title)
                         putExtra("message", item.message)
                         putExtra("alarmId", item.id.toString())
-                        putExtra("r", 1)
-                        putExtra("firingTime", timeInMillis)
+                        putExtra("r", "1")
                     }))
 
 //                    alarmManager.setRepeating(
@@ -108,6 +107,7 @@ class AndroidAlarmScheduler(
                 putExtra("title",item.title)
                 putExtra("message", item.message)
                 putExtra("alarmId", item.id.toString())
+                putExtra("r", "0")
             }))
 
 //            Toast.makeText(context, "berhasil buat alarm ${item.message} saat ${item.time}", Toast.LENGTH_SHORT)
