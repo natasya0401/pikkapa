@@ -28,24 +28,33 @@ import kotlin.concurrent.timer
 class AlarmReceiver: BroadcastReceiver() {
 
     lateinit var context : Context
+
+    var title = "title"
+    var message = "message"
+    var id = "id"
+
+    var repeat = "repeat"
+
+    var hour = "hour"
+    var minute = "minute"
+
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onReceive(context: Context?, intent: Intent?) {
         Log.d("alarm", "alarm triggered 1")
         if(context!=null) {
             this.context = context
-            val title = intent?.getStringExtra("title") ?: return
-            val message = intent?.getStringExtra("message") ?: return
-            val id = intent?.getStringExtra("alarmId") ?: return
+            Toast.makeText(context, "this", Toast.LENGTH_SHORT).show()
+            title = intent?.getStringExtra("title") ?: return
+            message = intent?.getStringExtra("message") ?: return
+            id = intent?.getStringExtra("alarmId") ?: return
 
-            val repeat = intent?.getStringExtra("r") ?: return
+            repeat = intent?.getStringExtra("r") ?: return
 
-            val pendingIntent : PendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE)
-            } else{
-                PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
-            }
+            hour = intent?.getStringExtra("hour") ?: return
+            minute = intent?.getStringExtra("minute") ?: return
 
-            Toast.makeText(context, "repeat : $repeat", Toast.LENGTH_SHORT).show()
+
+            Toast.makeText(context, "this : $hour : $minute", Toast.LENGTH_SHORT).show()
 
             if (repeat == "0") {
                 createNotificationChanel("reminder")
@@ -55,9 +64,13 @@ class AlarmReceiver: BroadcastReceiver() {
                 reminderAccess.delete(id.toInt())
 
             } else if (repeat == "1") {
+
                 createNotificationChanel("reminder")
-                setRepeatingDaily(AndroidAlarmScheduler(context), pendingIntent)
                 sendNotification(title, "reminder", id.toInt(), message)
+
+                setRepeatingDaily(AndroidAlarmScheduler(context), hour, minute)
+
+                Toast.makeText(context, "set : $hour : $minute", Toast.LENGTH_SHORT).show()
             }
 
 
@@ -137,12 +150,50 @@ class AlarmReceiver: BroadcastReceiver() {
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
-    fun setRepeatingDaily(androidAlarmScheduler: AndroidAlarmScheduler, pendingIntent: PendingIntent) {
-        val calendar = Calendar.getInstance().apply {
-            this.timeInMillis = timeInMillis + (24 * 60 * 60 * 1000)
-        }
+    fun setRepeatingDaily(androidAlarmScheduler: AndroidAlarmScheduler, hour : String, minute : String) {
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.DAY_OF_MONTH, 1)
+
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hour))
+        calendar.set(Calendar.MINUTE, Integer.parseInt(minute))
+        calendar.set(Calendar.SECOND, 0)
 
         val time = calendar.timeInMillis
+
+        val intent = androidAlarmScheduler.getIntent().apply {
+            putExtra("title",title)
+            putExtra("message", message)
+            putExtra("alarmId", id.toString())
+            putExtra("r", "1")
+            putExtra("hour", hour)
+            putExtra("minute", minute)
+        }
+        val pendingIntent = androidAlarmScheduler.getPendingIntent(intent)
+
+        androidAlarmScheduler.setRepeatDaily(time, pendingIntent)
+
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    fun setRepeatingWeekly(androidAlarmScheduler: AndroidAlarmScheduler, hour : String, minute : String) {
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.DAY_OF_MONTH, 1)
+
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hour))
+        calendar.set(Calendar.MINUTE, Integer.parseInt(minute))
+        calendar.set(Calendar.SECOND, 0)
+
+        val time = calendar.timeInMillis
+
+        val intent = androidAlarmScheduler.getIntent().apply {
+            putExtra("title",title)
+            putExtra("message", message)
+            putExtra("alarmId", id.toString())
+            putExtra("r", "1")
+            putExtra("hour", hour)
+            putExtra("minute", minute)
+        }
+        val pendingIntent = androidAlarmScheduler.getPendingIntent(intent)
 
         androidAlarmScheduler.setRepeatDaily(time, pendingIntent)
 
