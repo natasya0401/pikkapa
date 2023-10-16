@@ -27,12 +27,12 @@ class LocationActivity : AppCompatActivity() {
         setAllView()
         setAllOnClick()
 
-        locations.add(LocationEntity("Rumah Sakit 1", "Jl. Lokasi Rumah Sakit 1", "085123456789", "-7.95678280671865", "112.58977623771564"))
-        locations.add(LocationEntity("Rumah Sakit 2", "Jl. Lokasi Rumah Sakit 2", "085123456789", "-7.994110125108967", "112.63401518004514"))
-        locations.add(LocationEntity("Rumah Sakit 3", "Jl. Lokasi Rumah Sakit 3", "085123456789", "-7.986280123048572", "112.62486020703189"))
-        locations.add(LocationEntity("Rumah Sakit 4", "Jl. Lokasi Rumah Sakit 4", "085123456789", "-7.986460744282259", "112.62498358864043"))
-        locations.add(LocationEntity("Rumah Sakit 5", "Jl. Lokasi Rumah Sakit 5", "085123456789", "-7.986460744282259", "112.62498358864043"))
-
+        locations.add(LocationEntity("RSUD Dr. Saiful Anwar Malang", "Jl. Jaksa Agung Suprapto No.2, Klojen, Kec. Klojen, Kota Malang, Jawa Timur 65112", "081555606668", "-7.972251503711629", "112.63138576821063"))
+        locations.add(LocationEntity("Lavalette General Hospital", "Jl. W.R. Supratman No.10, Rampal Celaket, Kec. Klojen, Kota Malang, Jawa Timur 65111", "0881023138505", "-7.965696252827271", "112.63787778019133"))
+        locations.add(LocationEntity("Rumah Sakit Tk. II dr. Soepraoen", "Jl. S. Supriadi No.22, Sukun, Kec. Sukun, Kota Malang, Jawa Timur 65112", "081132299222", "-7.989879929066666", "112.62049022436923"))
+        locations.add(LocationEntity("Persada Hospital", "Jl. Panji Suroso Kompleks Araya Business Center Kav.2-4, Kota Malang 65126", "0341-2996299", "-7.93483468572546", "112.6502128169738"))
+        locations.add(LocationEntity("RSI Aisyiyah Malang", "Jl. Sulawesi No.16, Kasin, Kec. Klojen, Kota Malang, Jawa Timur 65117", "081234468808", "-7.9886124387788096", "112.62547543786255"))
+        locations.add(LocationEntity("Rumah Sakit Panti Nirmala", "Jl. Kebalen Wetan No.2-8, Kotalama, Kec. Kedungkandang, Kota Malang, Jawa Timur 65134", "081133320666", "-7.994163441109994", "112.6340902339901"))
     }
 
     fun setToolbar() {
