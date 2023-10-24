@@ -53,39 +53,39 @@ class HomeActivity : AppCompatActivity() {
     }
 
     fun setAllView() {
-        binding.layoutReminder.visibility = View.GONE
-
-        //dummy
-        var reminder = ReminderEntity(1, "Minum Obat","","15:00:00", "10-08-2023")
-
-        val sdf = SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
-        val reminderDate = sdf.parse("${reminder.date} ${reminder.time}")
-        val today = Date()
-
-        var duration = reminderDate.time - today.time
-        var countdown = object: CountDownTimer(duration, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                var millisUntilFinished = millisUntilFinished
-                val secondsInMilli: Long = 1000
-                val minutesInMilli = secondsInMilli * 60
-                val hoursInMilli = minutesInMilli * 60
-                val elapsedHours = millisUntilFinished / hoursInMilli
-                millisUntilFinished = millisUntilFinished % hoursInMilli
-                val elapsedMinutes = millisUntilFinished / minutesInMilli
-                millisUntilFinished = millisUntilFinished % minutesInMilli
-                val elapsedSeconds = millisUntilFinished / secondsInMilli
-                val hhmmss = String.format("%02d jam %02d menit %02d detik", elapsedHours, elapsedMinutes,elapsedSeconds)
-                binding.tvReminderCountdown.text = hhmmss
-            }
-
-            override fun onFinish() {
-                binding.layoutReminder.visibility = View.GONE
-            }
-        }
-        countdown.start()
-        binding.tvReminderTime.text = "${reminder.date} ${reminder.time}"
-        binding.tvReminderTitle.text = reminder.title
-        binding.layoutReminder.visibility = View.VISIBLE
+//        binding.layoutReminder.visibility = View.GONE
+//
+//        //dummy
+//        var reminder = ReminderEntity(1, "Minum Obat","","15:00:00", "10-08-2023")
+//
+//        val sdf = SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
+//        val reminderDate = sdf.parse("${reminder.date} ${reminder.time}")
+//        val today = Date()
+//
+//        var duration = reminderDate.time - today.time
+//        var countdown = object: CountDownTimer(duration, 1000) {
+//            override fun onTick(millisUntilFinished: Long) {
+//                var millisUntilFinished = millisUntilFinished
+//                val secondsInMilli: Long = 1000
+//                val minutesInMilli = secondsInMilli * 60
+//                val hoursInMilli = minutesInMilli * 60
+//                val elapsedHours = millisUntilFinished / hoursInMilli
+//                millisUntilFinished = millisUntilFinished % hoursInMilli
+//                val elapsedMinutes = millisUntilFinished / minutesInMilli
+//                millisUntilFinished = millisUntilFinished % minutesInMilli
+//                val elapsedSeconds = millisUntilFinished / secondsInMilli
+//                val hhmmss = String.format("%02d jam %02d menit %02d detik", elapsedHours, elapsedMinutes,elapsedSeconds)
+//                binding.tvReminderCountdown.text = hhmmss
+//            }
+//
+//            override fun onFinish() {
+//                binding.layoutReminder.visibility = View.GONE
+//            }
+//        }
+//        countdown.start()
+//        binding.tvReminderTime.text = "${reminder.date} ${reminder.time}"
+//        binding.tvReminderTitle.text = reminder.title
+//        binding.layoutReminder.visibility = View.VISIBLE
 
 
         //dummy
@@ -113,10 +113,10 @@ class HomeActivity : AppCompatActivity() {
     }
 
     fun setAllOnClick() {
-        binding.layoutReminder.setOnClickListener {
-            val myIntent = Intent(this, ReminderActivity::class.java)
-            this.startActivity(myIntent)
-        }
+//        binding.layoutReminder.setOnClickListener {
+//            val myIntent = Intent(this, ReminderActivity::class.java)
+//            this.startActivity(myIntent)
+//        }
 
         binding.tvMenuInformation.setOnClickListener {
             val myIntent = Intent(this, InformationActivity::class.java)
